@@ -1,4 +1,8 @@
-<body>
+<html>
+<head>
+<title> Hamburger</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head><body>
     <div id='sidedash' style="z-index: 2;">
 <nav role="navigation"  style="height: 100%; background-color: #2A2A2E;width: 7em; position: fixed;">
   <div id="menuToggle">
@@ -16,10 +20,19 @@
 
     <ul id="menu">
       <a href="#"><li>Home</li></a>
-      <a href="#"><li>About</li></a>
-      <a href="#"><li>Info</li></a>
+      <a href="#"><li>Events</li></a>
+      <a href="#"><li>Projects</li></a>
       <a href="#"><li>Contact</li></a>
+      <a href="#"><li>Blogs</li></a>
     </ul>
+      <br>
+      <br>
+      <ul style="list-style-type: none; font-size: 2em;padding-left: 0em;">
+          <a href="#"><li><div class="social-media-cont"><i class="fa fa-facebook" aria-hidden="true"></i></div></li></a>
+          <a href="#"><li><div class="social-media-cont"><i class="fa fa-instagram" aria-hidden="true"></i></div></li></a>
+          <a href="#"><li><div class="social-media-cont"><i class="fa fa-linkedin" aria-hidden="true"></i></div></li></a>
+          <a href="#"><li><div class="social-media-cont"><i class="fa fa-youtube-play" aria-hidden="true"></i></div></li></a>
+      </ul>
   </div>
 </nav>
     </div>
@@ -45,7 +58,18 @@ body
     .blogPort *{
         z-index: -2;
     }
-
+    ul li{
+        margin-top:0.4em;
+    }
+.social-media-cont{
+    border: 0.06em solid white;
+    width: 1em;
+    padding: 0.4em;
+    padding-left: 0em;
+    }
+    .social-media-cont i {
+        margin-left: 0.2em;
+    }
 #menuToggle
 {
   display: block;
@@ -251,3 +275,4 @@ function myFunction() {
 }
 </script>
 </body>
+</html>
