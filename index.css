@@ -1,0 +1,32 @@
+html body{
+    font-size: 3vw;
+    padding: 0;
+    margin: 0;
+    font-family: Electrolize;
+    background-color: rgb(25,25,25);
+}
+a:link{
+    color: white;
+}
+a:visited{
+    color:white;
+}
+.container{
+    padding: 2vh 5em 5em 5em;
+/*
+    display: flex;
+    flex-wrap: wrap;
+*/
+    background-color: rgb(25,25,25);
+}
+.social-media{
+    display: flex;
+    margin-top:1em;
+    border: 0.1em lawngreen solid;
+}
+.icons{
+    color:white;
+    padding-left: 14%;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+}
