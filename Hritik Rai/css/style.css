@@ -1288,7 +1288,8 @@ footer .credits a {
 }
 
 #clients .client-logo {
-  padding: 64px;
+  margin:1em;
+  padding: 16px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1303,7 +1304,7 @@ footer .credits a {
   align-items: center;
   border-right: 1px solid #d6eaff;
   border-bottom: 1px solid #d6eaff;
-  overflow: hidden;
+/*  overflow: hidden;*/
   background: #fff;
   height: 160px;
 }
@@ -1313,6 +1314,8 @@ footer .credits a {
   transform: scale(1.2);
 }
 
+
 #clients img {
+/*    border: 5px solid rgb(100,100,100);*/
   transition: all 0.4s ease-in-out;
 }
