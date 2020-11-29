@@ -1,0 +1,190 @@
+html {
+    font-family: Montserrat;
+}
+.navba {
+    padding-right: 3em;
+}
+.navba li {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    margin-right: 2em;
+}
+#arrow {
+    font-size: 20px;
+    position: absolute;
+    font-weight: 700;
+    color: rgb(224, 191, 130);
+    transition: font-size 0.7s;
+}
+
+.active {
+    font-weight: 700;
+    color: rgb(224, 191, 130);
+}
+
+#arrow:hover {
+    margin-top: -0.1em;
+    font-size: 30px;
+}
+
+.bord {
+    border-right: 2.5px solid white;
+}
+.bord h3 {
+    font-weight: 400;
+}
+#divide {
+}
+
+#divide p {
+    color: gray;
+    font-size: 0.75em;
+}
+
+.la img {
+    margin-left: 7em;
+    margin-top: 4em;
+}
+.la pre {
+    color: white;
+    margin-left: 3em;
+    margin-top: 4em;
+}
+
+.upBlock {
+    margin-bottom: 0.5em;
+    padding: 2.6em;
+    height: 16em;
+    width: 28.25em;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 2em;
+}
+
+.upBlock p {
+    margin-top: 1em;
+}
+.upBlock button {
+    padding: 0px;
+    border-color: rgb(255, 180, 68);
+    width: 7.25em;
+    height: 1.8em;
+    color: rgb(255, 180, 68);
+    outline-color: rgb(255, 180, 68);
+}
+
+.upBlock button:hover {
+    border-color: rgb(113, 74, 17);
+    background-color: rgb(255, 180, 68);
+}
+
+.doors {
+    width: 18.75em;
+    height: 31.68em;
+    margin-bottom: 1em;
+    margin-right: 2em;
+    transition-duration: 0.7s;
+    transition-property: all;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+    border-radius: 0.5em;
+}
+
+.doors:hover {
+    height: 34em;
+    width: 20em;
+}
+
+.btn-outline-light:hover {
+    color: black !important;
+}
+.btn-outline-warning:hover {
+    color: white !important;
+}
+
+@media screen and (max-width: 1137px) {
+    #bg2 {
+        height: 80em;
+    }
+    .jumbotron{
+        height: 32em !important;
+    }
+}
+
+@media screen and (max-width: 984px) {
+    .jumbotron{
+        height: 42em !important;
+    }
+}
+
+
+@media screen and (max-width: 411px) {
+    .jumbotron{
+        height: 99em !important;
+    }
+}
+
+
+@media screen and (max-width: 984px) {
+    .er{
+        height: 39em !important;
+    }
+}
+
+@media screen and (max-width: 1226px) {
+    #bg3 {
+        height: 45em;
+    }
+    #Profile {
+        display: none;
+    }
+}
+
+.navigators{
+    height: 0.7em;
+    width: 0.7em;
+    border-radius: 1em;
+    margin-right: 0.3em;
+}
+
+.pagin {
+    margin-bottom: 1em !important;
+    color: rgb(255, 180, 68) !important;
+    font-size: 1em !important;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#sec:hover {
+    color: white !important;
+    background-color: #5e44ff !important;
+}
+
+#thir:hover {
+    color: white !important;
+    background-color: #4ee058 !important;
+}
+
+#forth:hover {
+    color: white !important;
+}
+
+.myform{
+    border-color: #15477A !important;
+}
+
+.head{
+    margin-left: 2em;
+    font-size: 1.2em;
+    font-weight: bold;
+    color:#15477A;
+}
+.sub-head{
+    font-weight: bold;
+    font-size: 1em;
+    color:gray;
+}
+
+.pi{
+    font-size: 1.4em; !important;
+    color:#7e7e7e !important;
+}
