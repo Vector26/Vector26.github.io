@@ -1,132 +1,542 @@
-<html>
-<head>
-    <title>
-    Vector
-    </title>
-    <link rel="icon" href="hacker.png">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="jumbAnim.css">
-<link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    </head>
-<body>
-    <div class="container">
-        <div class="typewriter">
-          <div class="content" id="title">Vector</div>
-          <h4>root@localhost:~/</h4>
-          <p>I believe in the oneness of human race as one, for survival of the species into becoming from a 3 dimensional civilisation to 5th dimensional Gods.
-Also solves CTF when bored</p>
-        
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hritik Rai- Developer</title>
+    <meta
+      name="description"
+      content="Hritik Rai, Full stack Developer"
+    />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+    <meta name="author" content="Hritik Rai" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon" />
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Bootstrap CSS File -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Libraries CSS Files -->
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+
+    <!-- Main Stylesheet File -->
+    <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  </head>
+
+  <body id="page-top">
+    
+    <!--/ Nav Star /-->
+    <nav
+      class="navbar navbar-b navbar-trans navbar-expand-md fixed-top"
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand js-scroll" href="#page-top">Hritik Rai</a>
+        <button
+          class="navbar-toggler collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarDefault"
+          aria-controls="navbarDefault"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div
+          class="navbar-collapse collapse justify-content-end"
+          id="navbarDefault"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link js-scroll active" href="#home">Start</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll" href="#about">About</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link js-scroll" href="#service">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll" href="#work">Portfólio</a>
+            </li>-->
+            <!--
+              <li class="nav-item">
+              <a class="nav-link js-scroll" href="#blog">Blog</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link js-scroll" href="#contact">Contact</a>
+            </li>
+          </ul>
         </div>
-        
-        <script>
-        const chars = "Σ×Π#-_¯—→↓↑←0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZ";
+      </div>
+    </nav>
+    <!--/ Nav End /-->
 
-        var Glitch = function(selector, index, numberOfGlitchedLetter, timeGlitch, timePerLetter, timeBetweenGlitch){
-            this.selector = selector;
-            this.index = index;
-            this.numberOfGlitchedLetter = numberOfGlitchedLetter;
-            this.innerText;
-            this.charArray = [];
-            this.charIndex = [];
-            this.timeGlitch = timeGlitch;
-            this.timeBetweenGlitch = timeBetweenGlitch;
-            this.timePerLetter = timePerLetter;
-            this.maxCount = Math.floor(this.timeGlitch/this.timePerLetter);
-            this.count = 0;
-        }
-
-        Glitch.prototype.init = function(){
-            this.innerText = this.selector.innerText;
-            this.charArray = this.innerText.split("");
-            if(this.numberOfGlitchedLetter == undefined || this.numberOfGlitchedLetter > this.innerText.length){
-                this.numberOfGlitchedLetter = this.innerText.length;
-            }
-            this.defineCharIndexToRandomize();
-        }
-
-        Glitch.prototype.defineCharIndexToRandomize = function(){
-            this.charIndex = [];
-            for(let i=0; i<this.numberOfGlitchedLetter; i++){
-                let randCharIndex = Math.floor(Math.random() * this.charArray.length);
-                this.charIndex.push(randCharIndex);
-            }
-        }
-
-        Glitch.prototype.randomize = function(){
-            //copy the char array
-            let randomString = Array.from(this.charArray);
-
-            //randomize char
-            for(let i=0; i<this.numberOfGlitchedLetter; i++){
-                let randIndex = Math.floor(Math.random() * chars.length);
-                let randCharIndex = this.charIndex[i];
-                if(randomString[randCharIndex] !== ' '){
-                    randomString[randCharIndex] = chars[randIndex];
-                }
-            }
-            this.selector.innerText = randomString.join("");
-        }
-
-        Glitch.prototype.update = function(interval){
-            if(this.count >= this.maxCount - 1){
-                this.selector.innerText = this.innerText;
-                this.defineCharIndexToRandomize();
-                let ctx = this;
-                let wait = setTimeout(function(){
-                    ctx.count = 0;
-                }, this.timeBetweenGlitch);
-            }else{
-                this.randomize();
-                this.count ++;
-            }
-        }
-
-        Glitch.prototype.glitch = function(){
-            let ctx = this;
-            let interval= setInterval(function(){
-                ctx.update(this);
-              },this.timePerLetter);
-        }
-
-        var arrayElements;
-        var glitchArray = [];
-
-        function initAllGlitch(){
-            arrayElements = document.querySelectorAll(".content");
-            for(let i=0; i<arrayElements.length; i++){
-                let selector = arrayElements[i];
-                let randLetterNumber = 2 + Math.floor(Math.random() * 8);
-                let randGlitchTime = 500 + Math.floor(Math.random() * 2500);
-                let randGlitchPauseTime = 500 + Math.floor(Math.random() * 2500);
-                let glitch = new Glitch(selector, i, randLetterNumber, 200, 65, randGlitchPauseTime);
-                glitch.init();
-                glitchArray.push(glitch);
-            }
-        }
-
-
-        function update(){
-            for(let i=0; i<glitchArray.length; i++){
-                let glitch = glitchArray[i];
-                glitch.glitch();
-            }
-        }
-
-        initAllGlitch();
-        update();
-        </script>
-    <div class="social-media">
-        
-        <div class="icons"><a href="https://github.com/Vector26/"><i class="fa fa-github" aria-hidden="true"></i></a></div>
-        
-        <div class="icons"><a href="https://www.linkedin.com/in/hritik-rai-a22043130/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></div>
-        
-        
-        <div class="icons"><a href="https://www.instagram.com/hritikrai_2/"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
-        
-        <div class="icons"><a href="https://www.reddit.com/user/vector2604"><i class="fa fa-reddit" aria-hidden="true"></i></a></div>
+    <!--/ Intro Skew Star /-->
+    <div
+      id="home"
+      class="intro route bg-image"
+      style="background-image: url(img/intro-bg.jpeg);"
+    >
+      <div class="overlay-itro"></div>
+      <div class="intro-content display-table" data-aos="slide-down" data-aos-once="true" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1500">
+        <div class="table-cell">
+          <div class="container">
+            <!--<p class="display-6 color-d">Hello, world!</p>-->
+            <h1 class="intro-title mb-4">I'm Hritik Rai</h1>
+            <p class="intro-subtitle">
+              <span class="text-slider-items"
+                >Cyber Security specialist,Amazon Alexa Developer, MERN Stack developer,Full-Stack Dev,Pentester</span
+              ><strong class="text-slider"></strong>
+            </p>
+            <!-- <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> -->
+            <ul class="list-unstyled list-social list-inline">
+              <li class="list-inline-item">
+                <a href="https://www.instagram.com/hritikrai_2/"
+                  ><i class="ion-social-instagram"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/hritik-rai-a22043130/"
+                  ><i class="ion-social-linkedin"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/Vector26/"
+                  ><i class="ion-social-github"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-    </body>
+    <!--/ Intro Skew End /-->
+
+    <section id="about" class="about-mf sect-pt4 route">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="box-shadow-full" data-aos="slide-up" data-aos-once="true" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1500">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-sm-6 col-md-5">
+                      <div class="about-img" style="border-radius: 50%;height: 7em;width: 7em; overflow: hidden;background-image: url('img/testimonial.jpg');background-size: cover;background-position: center;">
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-7">
+                      <div class="about-info">
+                        <p>
+                          <span class="title-s">Name: </span>
+                          <span>Hritik Rai</span>
+                        </p>
+                        <p>
+                          <span class="title-s">Profile: </span>
+                          <span>Full Stack developer</span>
+                        </p>
+                            <p>
+                          <span class="title-s">linkedIn: </span>
+                          <span
+                            ><a
+                              style="color: blue;"
+                              href="https://www.linkedin.com/in/hritik-rai-a22043130/"
+                              >Access linkedin</a
+                            ></span
+                          >
+                        </p>
+                        <p>
+                          <span class="title-s">Phone: </span>
+                          <span> (+91) 9506180033</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="skill-mf">
+                    <p class="title-s">Skills</p>
+
+                    <span>JQuery | MySQL</span>
+                    <span class="pull-right">90%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 90%;"
+                        aria-valuenow="90"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+
+                    <span>EXPRESS JS | MONGO DB</span>
+                    <span class="pull-right">70%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 80%;"
+                        aria-valuenow="80"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+
+                    <span>HTML5 | CSS3 | JAVASCRIPT | BOOTSTRAP </span>
+                    <span class="pull-right">90%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 90%;"
+                        aria-valuenow="90"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+
+                    <span>PHP | NODE | JAVA | Django</span>
+                    <span class="pull-right">70%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 70%;"
+                        aria-valuenow="70"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+
+                    <span>WEB-APPLICATION SECURITY | LINUX | PENTESTING</span>
+                    <span class="pull-right">75%</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 75%;"
+                        aria-valuenow="75"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="about-me pt-4 pt-md-0">
+                    <div class="title-box-2">
+                      <h5 class="title-left">
+                        About Me
+                      </h5>
+                    </div>
+                    <p class="lead">
+                        I'm Hritik Rai, I live in U.P. ,India and I am currently a full stack developer pursuing B.Tech In Jaypee University of Technology. I'm passionate about productivity and growth of Humans as a society. I have been developing applications and stuff since I was 15. Curiosity might have killed the cat, but gives me excitement towards life.
+                    </p>
+                    <p class="lead">
+                        Full Stack Web-Developer. Specializes in JQuery and Responsive development.
+                        Veried Amazon Alexa Developer.Python Developer and specialized in Flask
+                        Module.
+                    </p>
+                    <p class="lead">
+                      Solves CTF when bored.
+                        Also knows Windows Shell/Linux Terminal , Networking, Forensics,Cryptography,Web Pentesting.<b style="color: red;">❤</b>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--==========================
+      Clients Section
+    ============================-->
+    <section id="clients" class="section-bg">
+      <div class="container">
+        <div class="section-header">
+          <h3>My Projects</h3>
+          <p>
+            Be my customer.
+          </p>
+        </div>
+
+        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo"><a href="Projects/IMUN/">
+                <img src="img/IMUN.png" class="img-fluid" alt="" />
+                </a>
+            <div class="Project-Info"><p>IMUN</p></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo">
+              <a href="https://listyfied.com/">
+                  <img src="img/Listyfied.png" class="img-fluid" alt="" />
+                </a>
+            <div class="Project-Info"><p>Listyfied.com</p></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo">
+              <a href="https://github.com/Vector26/TravelIndia.git">
+              <img src="img/Alexa.png" class="img-fluid" alt="" />
+                </a>
+            <div class="Project-Info"><p>Travel-India Alexa Skill</p></div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo">
+              <a href="https://github.com/Vector26/Vector26-SAY-IT">
+              <img src="img/trait.png" class="img-fluid" alt="" />
+                </a>
+            <div class="Project-Info"><p>SAY-IT</p></div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo">
+              <a href="https://play.google.com/store/apps/details?id=com.indian.IndiYo&hl=en_IN&gl=US">
+              <img src="img/IndiYo.jpg" class="img-fluid" alt="" />
+                </a>
+            <div class="Project-Info"><p>IndiYo Server-Side</p></div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo">
+              <a href="https://github.com/Vector26/General-Django-CMS-Template">
+              <img src="img/sM.jpg" class="img-fluid" alt="" style=""/>
+                </a>
+            <div class="Project-Info"><p>Django CMS REST-API</p></div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo">
+              <a href="https://hritik-rai.medium.com/tryhackme-wgel-ctf-writeup-e8561740aa2f">
+              <img src="img/Screenshot_3.png" class="img-fluid" alt="" style=""/>
+                </a>
+            <div class="Project-Info"><p>TryHackMe Writeup on Medium</p></div>
+            </div>
+          </div>
+            
+        </div>
+      </div>
+    </section>
+
+
+    <!--/ Section Contact-Footer Star /-->
+    <section
+      class="paralax-mf footer-paralax bg-image sect-mt4 route"
+      style="background-image: url(img/overlay-bg.jpg);"
+    >
+      <div class="overlay-mf"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="contact-mf">
+              <div id="contact" class="box-shadow-full">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="title-box-2">
+                      <h5 class="title-left">
+                        Send a Message
+                      </h5>
+                    </div>
+                    <div>
+                      <form
+                        action="https://script.google.com/macros/s/AKfycbyswsqRriKgE4RMV00lQlssfqD7qKRsXA99_RplYnSNFyOtUWc/exec"
+                        method="post"
+                        role="form"
+                        class="contactForm"
+                      >
+                        <div id="sendmessage">
+                          Your message has been sent. Thank you!
+                        </div>
+                        <div id="errormessage"></div>
+                        <div class="row">
+                          <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                              <input
+                                type="text"
+                                name="name"
+                                class="form-control"
+                                id="name"
+                                placeholder="Your Name"
+                                data-rule="minlen:4"
+                                data-msg="Please enter at least 4 chars"
+                              />
+                              <div class="validation"></div>
+                            </div>
+                          </div>
+                          <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                              <input
+                                type="email"
+                                class="form-control"
+                                name="email"
+                                id="email"
+                                placeholder="Your e-mail"
+                                data-rule="email"
+                                data-msg="Please enter a valid email"
+                              />
+                              <div class="validation"></div>
+                            </div>
+                          </div>
+                          <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="subject"
+                                id="subject"
+                                placeholder="Subject"
+                                data-rule="minlen:4"
+                                data-msg="Enter at least 8 characters of the subject"
+                              />
+                              <div class="validation"></div>
+                            </div>
+                          </div>
+                          <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                              <textarea
+                                class="form-control"
+                                name="message"
+                                rows="5"
+                                data-rule="required"
+                                data-msg="Please write something"
+                                placeholder="Message"
+                              ></textarea>
+                              <div class="validation"></div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <button
+                              type="submit"
+                              class="button button-a button-big button-rouded"
+                            >
+                              Send
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="title-box-2 pt-4 pt-md-0">
+                      <h5 class="title-left">
+                        Get in touch
+                      </h5>
+                    </div>
+                    <div class="more-info">
+                      <p class="lead">
+                        Tell us your idea. Send an email, or call and tell us about what you want to develop.
+                      </p>
+                      <ul class="list-ico">
+                        <li>
+                          <span class="ion-ios-location"></span> India
+                          - IN
+                        </li>
+                        <li>
+                          <span class="ion-ios-telephone"></span> (+91) 9506180033
+                        </li>
+                        <li>
+                          <span class="ion-email"></span>
+                          hritik.26.rai@gmail.com
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="socials">
+                      <ul>
+                        <li>
+                         <a href="https://github.com/Vector26/"><span class="ico-circle"
+                              ><i class="ion-social-github"></i></span
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://www.linkedin.com/in/hritik-rai-a22043130/"><span class="ico-circle"
+                              ><i class="ion-social-linkedin"></i></span
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://www.instagram.com/hritikrai_2/"><span class="ico-circle"
+                              ><i class="ion-social-instagram"></i></span
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="copyright-box">
+                <p class="copyright" style="color: transparent;">
+                  &copy; Copyright <strong>DevFolio</strong>. All Rights
+                  Reserved
+                </p>
+                <div class="credits" style="color: transparent;">
+                  <!--
+                  All the links in the footer should remain intact.
+                  You can delete the links only if you purchased the pro version.
+                  Licensing information: https://bootstrapmade.com/license/
+                  Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=DevFolio
+                -->
+<!--
+                  Designed by
+                  <a
+                    href="https://bootstrapmade.com/"
+                    style="color: transparent;"
+                    >BootstrapMade</a
+                  >
+-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </section>
+    <!--/ Section Contact-footer End /-->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <div id="preloader"></div>
+
+    <!-- JavaScript Libraries -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/jquery/jquery-migrate.min.js"></script>
+    <script src="lib/popper/popper.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/counterup/jquery.waypoints.min.js"></script>
+    <script src="lib/counterup/jquery.counterup.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="lib/typed/typed.min.js"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="contactform/contactform.js"></script>
+      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+    <!-- Template Main Javascript File -->
+    <script src="js/main.js"></script>
+  </body>
 </html>
