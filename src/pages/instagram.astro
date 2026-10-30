@@ -4,7 +4,7 @@ import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import instagram from '../data/instagram.json';
 
-type Kind = 'photo' | 'carousel' | 'reel';
+type Kind = 'photo' | 'carousel' | 'reel' | 'post';
 
 const files = import.meta.glob<{ default: ImageMetadata }>('../assets/instagram/**/*.{jpg,webp}', { eager: true });
 const asset = (name: string): ImageMetadata => {
@@ -52,7 +52,7 @@ const viewerData = posts.map((p) => ({
   caption: p.caption,
 }));
 
-const kindLabel: Record<Kind, string> = { photo: 'Photo', carousel: 'Carousel', reel: 'Reel' };
+const kindLabel: Record<Kind, string> = { photo: 'Photo', carousel: 'Carousel', reel: 'Reel', post: 'Post' };
 ---
 <BaseLayout
   title="Instagram"
@@ -91,7 +91,8 @@ const kindLabel: Record<Kind, string> = { photo: 'Photo', carousel: 'Carousel', 
             <img src={p.thumb} alt="" width="540" height={Math.round((540 * p.height) / p.width)} loading={i < 6 ? 'eager' : 'lazy'} decoding="async" />
             <span class="ig__badges">
               {p.pinned && <span class="ig__badge mono">Pinned</span>}
-              {p.kind !== 'photo' && <span class="ig__badge mono">{p.kind === 'reel' ? '▶ Reel' : '❏ Carousel'}</span>}
+              {p.kind === 'reel' && <span class="ig__badge mono">▶ Reel</span>}
+              {p.kind === 'carousel' && <span class="ig__badge mono">❏ Carousel</span>}
             </span>
             {p.caption && <span class="ig__cap">{p.caption}</span>}
           </a>

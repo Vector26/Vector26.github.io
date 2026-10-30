@@ -1,5 +1,5 @@
 type ViewerPost = {
-  kind: 'photo' | 'carousel' | 'reel';
+  kind: 'photo' | 'carousel' | 'reel' | 'post';
   url: string;
   embed: string;
   full: string;
@@ -8,7 +8,13 @@ type ViewerPost = {
   caption: string;
 };
 
-const KIND_LABEL: Record<ViewerPost['kind'], string> = { photo: 'Photo', carousel: 'Carousel', reel: 'Reel' };
+const KIND_LABEL: Record<ViewerPost['kind'], string> = { photo: 'Photo', carousel: 'Carousel', reel: 'Reel', post: 'Post' };
+const OPEN_LABEL: Record<ViewerPost['kind'], string> = {
+  photo: 'Open on Instagram ↗',
+  post: 'Open on Instagram ↗',
+  carousel: 'See all slides on Instagram ↗',
+  reel: 'Watch on Instagram ↗',
+};
 
 function renderCaption(el: HTMLElement, text: string): void {
   el.replaceChildren();
@@ -33,9 +39,22 @@ function renderCaption(el: HTMLElement, text: string): void {
   }
 }
 
+// Instagram's /embed/ page wraps the media in a header (~60px) and an action/footer bar (~130px).
+const EMBED_CHROME_PX = 190;
+const EMBED_MAX_WIDTH = 480;
+
+function sizeEmbed(el: HTMLElement, post: ViewerPost): void {
+  const frame = el.querySelector<HTMLIFrameElement>('.ig-view__embed');
+  if (!frame) return;
+  const width = Math.min(el.clientWidth, EMBED_MAX_WIDTH);
+  frame.style.width = `${width}px`;
+  frame.style.height = `${Math.round((width * post.height) / post.width) + EMBED_CHROME_PX}px`;
+}
+
 function renderMedia(el: HTMLElement, post: ViewerPost): void {
   el.replaceChildren();
   el.dataset.kind = post.kind;
+  el.classList.toggle('is-embed', post.kind !== 'photo');
   const img = document.createElement('img');
   img.src = post.full;
   img.alt = '';
@@ -54,6 +73,7 @@ function renderMedia(el: HTMLElement, post: ViewerPost): void {
   frame.addEventListener('load', () => el.classList.add('is-embedded'), { once: true });
   el.classList.remove('is-embedded');
   el.append(frame);
+  sizeEmbed(el, post);
 }
 
 function initViewer(): void {
@@ -74,16 +94,15 @@ function initViewer(): void {
     renderCaption(caption, post.caption);
     kind.textContent = `${KIND_LABEL[post.kind]} · ${current + 1}/${posts.length}`;
     open.href = post.url;
-    open.textContent = post.kind === 'photo' ? 'Open on Instagram ↗' : `Watch on Instagram ↗`;
-    if (post.kind === 'carousel') open.textContent = 'See all slides on Instagram ↗';
+    open.textContent = OPEN_LABEL[post.kind];
   };
 
   document.querySelectorAll<HTMLAnchorElement>('.ig__tile').forEach((tile) => {
     tile.addEventListener('click', (e) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
       e.preventDefault();
-      show(Number(tile.dataset.i));
       dialog.showModal();
+      show(Number(tile.dataset.i));
     });
   });
 
@@ -94,6 +113,9 @@ function initViewer(): void {
     if (e.target === dialog) dialog.close();
   });
   dialog.addEventListener('close', () => media.replaceChildren());
+  window.addEventListener('resize', () => {
+    if (dialog.open) sizeEmbed(media, posts[current]);
+  });
   dialog.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') show(current - 1);
     if (e.key === 'ArrowRight') show(current + 1);

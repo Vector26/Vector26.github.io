@@ -61,11 +61,17 @@ async function main() {
     if (!src) continue;
     seen.add(code);
     const alt = decode(img[0].match(/alt="([^"]*)"/)?.[1] ?? '').trim();
-    const kind = type === 'reel' || /Clip/.test(inner) ? 'reel' : /Carousel/.test(inner) ? 'carousel' : 'photo';
+    const pinned = /Pinned post icon/.test(inner);
+    // Pinned tiles show only the pin icon, so a pinned /p/ post may be a photo or a carousel.
+    const kind =
+      type === 'reel' || /Clip/.test(inner) ? 'reel'
+      : /Carousel/.test(inner) ? 'carousel'
+      : pinned ? 'post'
+      : 'photo';
     posts.push({
       code,
       kind,
-      pinned: /Pinned post icon/.test(inner),
+      pinned,
       url: `https://www.instagram.com/${type}/${code}/`,
       caption: alt,
       image: await copyImage(filesDir, src, code),
