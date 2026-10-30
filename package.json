@@ -7,13 +7,13 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run sync:substack && astro build",
+    "build": "npm run sync:substack && npm run sync:pinterest && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "sync:substack": "node scripts/sync-substack.mjs",
     "import:instagram": "node scripts/import-instagram.mjs",
     "import:instagram-media": "node scripts/import-instagram-media.mjs",
-    "import:pinterest": "node scripts/import-pinterest.mjs"
+    "sync:pinterest": "node scripts/sync-pinterest.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",

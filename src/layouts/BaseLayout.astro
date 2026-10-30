@@ -7,7 +7,7 @@ import { getProfile } from '../lib/site';
 interface Props {
   title?: string;
   description?: string;
-  current?: 'home' | 'about' | 'substack' | 'projects' | 'instagram';
+  current?: 'home' | 'about' | 'substack' | 'projects' | 'instagram' | 'pinterest';
   canonical?: string;
   image?: string;
 }
@@ -42,5 +42,6 @@ const pageDesc = description ?? profile.about;
     </main>
     <Footer profile={profile} />
     <script src="../scripts/cipher.ts"></script>
+    <script src="../scripts/reveal.ts"></script>
   </body>
 </html>
