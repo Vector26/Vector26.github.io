@@ -4,3 +4,6 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Large video, published straight to the master branch (see DEPLOY.md)
+public/media/

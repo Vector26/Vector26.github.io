@@ -5,21 +5,50 @@ interface Props {
   profile: CollectionEntry<'profile'>['data'];
   projects: CollectionEntry<'projects'>[];
   blog: CollectionEntry<'blog'>[];
+  experience: CollectionEntry<'experience'>[];
 }
-const { profile, projects, blog } = Astro.props;
+const { profile, projects, blog, experience } = Astro.props;
+
+const monthYear = (d: Date) => d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+const ym = (s: string) => {
+  const [y, m] = s.split('-');
+  return new Date(Number(y), Number(m) - 1).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+};
 
 const termData = {
-  projects: projects.map((p) => ({
-    title: p.data.title,
-    href: p.data.url ?? p.data.repo,
-    meta: p.data.tags.join(', '),
+  name: profile.name,
+  tagline: profile.tagline,
+  location: profile.location,
+  email: profile.email,
+  links: profile.links,
+  experience: experience.map((e) => ({
+    company: e.data.company,
+    title: e.data.title,
+    span: `${ym(e.data.start)} – ${e.data.current || !e.data.end ? 'now' : ym(e.data.end)}`,
   })),
-  blog: blog.map((b) => ({
+  projects: projects.map((p) => ({
+    slug: p.id,
+    title: p.data.title,
+    description: p.data.description,
+    href: p.data.url ?? p.data.repo ?? '/projects',
+    tags: p.data.tags,
+    stars: p.data.stars ?? 0,
+  })),
+  essays: blog.map((b) => ({
+    slug: b.id,
     title: b.data.title,
-    href: new URL(`/substack/${b.id}`, Astro.site).href,
-    meta: b.data.pubDate.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }),
+    href: `/substack/${b.id}`,
+    date: monthYear(b.data.pubDate),
   })),
 };
+
+const apps = [
+  { app: 'terminal', title: `${profile.given.toLowerCase()} — zsh`, tip: 'Terminal' },
+  { app: 'finder', title: 'Finder — Projects', tip: 'Finder' },
+  { app: 'notes', title: 'Notes — Substack', tip: 'Notes' },
+  { app: 'mail', title: 'New Message', tip: 'Mail' },
+];
+const titleOf = (app: string) => apps.find((a) => a.app === app)?.title ?? app;
 ---
 <section class="desk" id="desktop" aria-labelledby="desk-title">
   <div class="wrap desk__head">
@@ -28,98 +57,176 @@ const termData = {
     <p class="section-lead">A working terminal and a few apps. Type <span class="mono">help</span>, or open one from the Dock.</p>
   </div>
   <div class="desk__screen">
-    <div class="win win--terminal" data-app="terminal" style="left:12px;top:12px;width:min(520px,95%)">
+    <div class="win win--terminal" data-app="terminal" role="region" aria-label={titleOf('terminal')}>
       <div class="win__bar">
         <span class="win__lights">
-          <button class="win__btn win__btn--close" type="button" data-act="close" aria-label="Close"></button>
-          <button class="win__btn win__btn--min" type="button" data-act="min"></button>
-          <button class="win__btn win__btn--max" type="button" data-act="max"></button>
+          <button class="win__btn win__btn--close" type="button" data-act="close" aria-label="Close terminal"></button>
+          <button class="win__btn win__btn--min" type="button" data-act="min" aria-label="Minimise terminal"></button>
+          <button class="win__btn win__btn--max" type="button" data-act="max" aria-label="Maximise terminal"></button>
         </span>
-        <span class="win__title">hritik — zsh</span>
+        <span class="win__title">{titleOf('terminal')}</span>
+        <span class="win__spacer"></span>
       </div>
       <div class="win__body">
-        <div class="term">
-          <div class="term__output mono" role="log" aria-live="polite"></div>
-          <label class="term__inputline mono">
-            <span class="term__prompt">hritik@vector26 ~ % </span>
-            <input class="term__input" type="text" autocomplete="off" spellcheck="false" aria-label="Terminal input" placeholder="type 'help'" />
+        <div class="term mono">
+          <div class="term__output" role="log" aria-live="polite"></div>
+          <label class="term__inputline">
+            <span class="term__prompt">hritik@vector26 ~ %&nbsp;</span>
+            <input class="term__input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input" placeholder="type 'help' · tab completes" />
           </label>
-          <script type="application/json" id="term-data" set:html={JSON.stringify(termData)} />
+        </div>
+        <script type="application/json" id="term-data" set:html={JSON.stringify(termData)} />
+      </div>
+      <span class="win__resize" aria-hidden="true"></span>
+    </div>
+
+    <div class="win win--finder" data-app="finder" role="region" aria-label={titleOf('finder')} hidden>
+      <div class="win__bar">
+        <span class="win__lights">
+          <button class="win__btn win__btn--close" type="button" data-act="close" aria-label="Close Finder"></button>
+          <button class="win__btn win__btn--min" type="button" data-act="min" aria-label="Minimise Finder"></button>
+          <button class="win__btn win__btn--max" type="button" data-act="max" aria-label="Maximise Finder"></button>
+        </span>
+        <span class="win__title">{titleOf('finder')}</span>
+        <span class="win__spacer"></span>
+      </div>
+      <div class="win__body">
+        <div class="finder">
+          <nav class="finder__side" aria-label="Places">
+            <button class="finder__place is-active" type="button" data-place="projects">Projects</button>
+            <button class="finder__place" type="button" data-place="essays">Essays</button>
+          </nav>
+          <div class="finder__main">
+            <div class="finder__tools">
+              <span class="finder__crumb mono">~/<span data-crumb>projects</span></span>
+              <input class="finder__search" type="search" placeholder="Search" aria-label="Filter files" />
+            </div>
+            <div class="finder__table" data-place-pane="projects">
+              <div class="finder__row finder__row--head"><span>Name</span><span>Stack</span><span>★</span></div>
+              {projects.map((p) => (
+                <a class="finder__row" href={p.data.url ?? p.data.repo ?? '/projects'} target="_blank" rel="noopener" data-search={`${p.data.title} ${p.data.tags.join(' ')}`.toLowerCase()} title={p.data.description}>
+                  <span class="finder__name">{p.id}</span>
+                  <span class="finder__kind">{p.data.tags.slice(0, 3).join(' · ')}</span>
+                  <span class="finder__stars">{p.data.stars ?? '—'}</span>
+                </a>
+              ))}
+            </div>
+            <div class="finder__table" data-place-pane="essays" hidden>
+              <div class="finder__row finder__row--head"><span>Name</span><span>Published</span><span></span></div>
+              {blog.map((b) => (
+                <a class="finder__row" href={`/substack/${b.id}`} data-search={b.data.title.toLowerCase()}>
+                  <span class="finder__name">{b.id}.md</span>
+                  <span class="finder__kind">{monthYear(b.data.pubDate)}</span>
+                  <span></span>
+                </a>
+              ))}
+            </div>
+            <p class="finder__count mono" data-count></p>
+          </div>
         </div>
       </div>
+      <span class="win__resize" aria-hidden="true"></span>
     </div>
 
-    <div class="win win--finder" data-app="finder" hidden style="left:48px;top:48px;width:min(480px,95%)">
+    <div class="win win--notes" data-app="notes" role="region" aria-label={titleOf('notes')} hidden>
       <div class="win__bar">
         <span class="win__lights">
-          <button class="win__btn win__btn--close" type="button" data-act="close"></button>
-          <button class="win__btn win__btn--min" type="button" data-act="min"></button>
-          <button class="win__btn win__btn--max" type="button" data-act="max"></button>
+          <button class="win__btn win__btn--close" type="button" data-act="close" aria-label="Close Notes"></button>
+          <button class="win__btn win__btn--min" type="button" data-act="min" aria-label="Minimise Notes"></button>
+          <button class="win__btn win__btn--max" type="button" data-act="max" aria-label="Maximise Notes"></button>
         </span>
-        <span class="win__title">Projects</span>
+        <span class="win__title">{titleOf('notes')}</span>
+        <span class="win__spacer"></span>
       </div>
       <div class="win__body">
-        {projects.map((p) => (
-          <a class="finder__row" href={p.data.url ?? p.data.repo ?? '/projects'} target={p.data.url ? '_blank' : undefined} rel="noopener">
-            <span>{p.data.title}</span>
-            <span class="mono faint">{p.data.tags.join(' · ')}</span>
-          </a>
-        ))}
-      </div>
-    </div>
-
-    <div class="win win--notes" data-app="notes" hidden style="left:84px;top:36px;width:min(440px,95%)">
-      <div class="win__bar">
-        <span class="win__lights">
-          <button class="win__btn win__btn--close" type="button" data-act="close"></button>
-          <button class="win__btn win__btn--min" type="button" data-act="min"></button>
-          <button class="win__btn win__btn--max" type="button" data-act="max"></button>
-        </span>
-        <span class="win__title">Notes — Substack</span>
-      </div>
-      <div class="win__body">
-        {blog.map((b, i) => (
-          <div>
-            <button type="button" class:list={['notes__item', { 'is-active': i === 0 }]} data-note={b.id}>
-              <span class="notes__title">{b.data.title}</span>
-              <span class="notes__meta mono">{b.data.description.slice(0, 80)}…</span>
-            </button>
-            <article class="notes__doc" data-note={b.id} hidden={i !== 0}>
-              <p class="faint">{b.data.description}</p>
-              <a class="btn btn--primary" href={`/substack/${b.id}`}>Read essay →</a>
-            </article>
+        <div class="notes">
+          <ul class="notes__list">
+            {blog.map((b, i) => (
+              <li>
+                <button type="button" class:list={['notes__item', { 'is-active': i === 0 }]} data-note={b.id}>
+                  <span class="notes__title">{b.data.title}</span>
+                  <span class="notes__meta">{monthYear(b.data.pubDate)}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div class="notes__pane">
+            {blog.map((b, i) => (
+              <article class="notes__doc" data-note={b.id} hidden={i !== 0}>
+                <p class="notes__date mono">{monthYear(b.data.pubDate)}</p>
+                <h3 class="notes__h">{b.data.title}</h3>
+                <p class="notes__p">{b.data.description}</p>
+                <a class="btn btn--primary" href={`/substack/${b.id}`}>Read essay →</a>
+              </article>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
+      <span class="win__resize" aria-hidden="true"></span>
     </div>
 
-    <div class="win win--mail" data-app="mail" hidden style="left:120px;top:72px;width:min(400px,95%)">
+    <div class="win win--mail" data-app="mail" role="region" aria-label={titleOf('mail')} hidden>
       <div class="win__bar">
         <span class="win__lights">
-          <button class="win__btn win__btn--close" type="button" data-act="close"></button>
-          <button class="win__btn win__btn--min" type="button" data-act="min"></button>
-          <button class="win__btn win__btn--max" type="button" data-act="max"></button>
+          <button class="win__btn win__btn--close" type="button" data-act="close" aria-label="Close Mail"></button>
+          <button class="win__btn win__btn--min" type="button" data-act="min" aria-label="Minimise Mail"></button>
+          <button class="win__btn win__btn--max" type="button" data-act="max" aria-label="Maximise Mail"></button>
         </span>
-        <span class="win__title">New Message</span>
+        <span class="win__title">{titleOf('mail')}</span>
+        <span class="win__spacer"></span>
       </div>
       <div class="win__body">
-        <form class="mail" action={`mailto:${profile.email}`} method="get">
-          <label class="mail__field"><span>To:</span><input type="text" value={profile.email} readonly /></label>
-          <label class="mail__field"><span>Subject:</span><input name="subject" type="text" value="Hello Hritik" /></label>
-          <textarea name="body" class="mail__body" placeholder="Write your message…"></textarea>
-          <button class="btn btn--primary" type="submit">Send via Mail ↗</button>
+        <form class="mail" data-to={profile.email}>
+          <div class="mail__field"><span>To:</span><span class="mail__to">{profile.name} &lt;{profile.email}&gt;</span>
+            <button class="mail__copy mono" type="button" data-copy={profile.email}>copy</button></div>
+          <label class="mail__field"><span>Subject:</span><input name="subject" type="text" placeholder="Hello Hritik" required /></label>
+          <textarea name="body" class="mail__body" placeholder="Write your message…" required></textarea>
+          <div class="mail__foot">
+            <span class="mail__links">
+              <a href={profile.links.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+              <a href={profile.links.github} target="_blank" rel="noopener">GitHub ↗</a>
+            </span>
+            <span class="mail__status mono" aria-live="polite"></span>
+            <button class="btn btn--primary" type="submit">Send</button>
+          </div>
         </form>
       </div>
+      <span class="win__resize" aria-hidden="true"></span>
     </div>
 
     <nav class="dock" aria-label="Dock">
-      <button class="dock__item is-running" type="button" data-launch="terminal" aria-label="Terminal">⌘<span class="dock__dot"></span></button>
-      <button class="dock__item" type="button" data-launch="finder" aria-label="Projects">📁<span class="dock__dot"></span></button>
-      <button class="dock__item" type="button" data-launch="notes" aria-label="Notes">📝<span class="dock__dot"></span></button>
-      <button class="dock__item" type="button" data-launch="mail" aria-label="Mail">✉️<span class="dock__dot"></span></button>
-      <a class="dock__item" href={profile.links.github} target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-      <a class="dock__item" href={profile.links.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-      <a class="dock__item" href="/instagram" aria-label="Instagram">IG</a>
+      <button class="dock__item dock__item--dark" type="button" data-launch="terminal" data-tip="Terminal" aria-label="Open Terminal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 7 5 5-5 5M12 17h7"/></svg>
+        <span class="dock__dot"></span>
+      </button>
+      <button class="dock__item dock__item--blue" type="button" data-launch="finder" data-tip="Finder" aria-label="Open Finder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        <span class="dock__dot"></span>
+      </button>
+      <button class="dock__item dock__item--amber" type="button" data-launch="notes" data-tip="Notes" aria-label="Open Notes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h4"/></svg>
+        <span class="dock__dot"></span>
+      </button>
+      <button class="dock__item dock__item--sky" type="button" data-launch="mail" data-tip="Mail" aria-label="Open Mail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <span class="dock__dot"></span>
+      </button>
+      <span class="dock__sep" aria-hidden="true"></span>
+      <a class="dock__item" href={profile.links.github} target="_blank" rel="noopener" data-tip="GitHub" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+      </a>
+      <a class="dock__item dock__item--li" href={profile.links.linkedin} target="_blank" rel="noopener" data-tip="LinkedIn" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>
+      </a>
+      <a class="dock__item dock__item--ig" href="/instagram" data-tip="Instagram" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+      <a class="dock__item dock__item--pin" href="/pinterest" data-tip="Pinterest" aria-label="Pinterest">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.64 19.31c-.09-.79-.17-2 .03-2.86l1.17-4.97s-.3-.6-.3-1.48c0-1.39.8-2.42 1.81-2.42.85 0 1.26.64 1.26 1.4 0 .86-.55 2.14-.83 3.33-.24 1 .5 1.8 1.48 1.8 1.78 0 3.14-1.87 3.14-4.57 0-2.39-1.72-4.06-4.17-4.06-2.84 0-4.5 2.13-4.5 4.33 0 .86.33 1.78.74 2.28.08.1.09.18.07.28l-.28 1.13c-.04.18-.15.22-.33.13-1.25-.58-2.03-2.4-2.03-3.87 0-3.15 2.29-6.05 6.6-6.05 3.46 0 6.16 2.47 6.16 5.77 0 3.45-2.17 6.22-5.19 6.22-1.01 0-1.97-.53-2.29-1.15l-.62 2.38c-.23.87-.84 1.96-1.25 2.62A10 10 0 1 0 12 2z"/></svg>
+      </a>
+      <a class="dock__item dock__item--ss" href="/substack" data-tip="Substack" aria-label="Substack">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 3h16v2.6H4zM4 7.7h16v2.6H4zM4 12.4h16V22l-8-4.4L4 22z"/></svg>
+      </a>
     </nav>
   </div>
 </section>

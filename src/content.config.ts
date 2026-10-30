@@ -55,6 +55,7 @@ const profile = defineCollection({
       linkedin: z.string().url(),
       substack: z.string().url(),
       instagram: z.string().url(),
+      pinterest: z.string().url(),
       website: z.string().url(),
     }),
     chips: z.array(

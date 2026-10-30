@@ -47,7 +47,8 @@ jobs:
         id: publish
         working-directory: out
         run: |
-          rsync -a --delete --exclude '.git' --exclude '.github' ../src/dist/ ./
+          # /media (Instagram + Pinterest video) is committed straight to master, not built from source.
+          rsync -a --delete --exclude '.git' --exclude '.github' --exclude '/media' ../src/dist/ ./
           git add -A
           if git diff --cached --quiet; then
             echo "No changes to publish."

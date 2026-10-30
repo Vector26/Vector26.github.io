@@ -12,80 +12,149 @@
     ],
     "avatar": "avatar.jpg"
   },
-  "highlights": [
-    {
-      "title": "Kazak",
-      "image": "highlights/01.jpg"
-    },
-    {
-      "title": "🎞️",
-      "image": "highlights/02.jpg"
-    },
-    {
-      "title": "Bali",
-      "image": "highlights/03.jpg"
-    },
-    {
-      "title": "❤️",
-      "image": "highlights/04.jpg"
-    },
-    {
-      "title": "Clicks",
-      "image": "highlights/05.jpg"
-    },
-    {
-      "title": "gallery of tryin",
-      "image": "highlights/06.jpg"
-    },
-    {
-      "title": "!You",
-      "image": "highlights/07.jpg"
-    },
-    {
-      "title": "Mulki - Surfing",
-      "image": "highlights/08.jpg"
-    },
-    {
-      "title": "Bangalore",
-      "image": "highlights/09.jpg"
-    },
-    {
-      "title": "varkala.",
-      "image": "highlights/10.jpg"
-    },
-    {
-      "title": "linkedin park'25",
-      "image": "highlights/11.jpg"
-    },
-    {
-      "title": "Misc",
-      "image": "highlights/12.jpg"
-    },
-    {
-      "title": "Jaipur",
-      "image": "highlights/13.jpg"
-    },
-    {
-      "title": "Vietnam 🇻🇳",
-      "image": "highlights/14.jpg"
-    }
-  ],
   "posts": [
     {
       "code": "DarGQkGEvVi",
-      "kind": "post",
+      "kind": "carousel",
       "pinned": true,
       "url": "https://www.instagram.com/p/DarGQkGEvVi/",
       "caption": "Its been a long time coming but I never did get time to finish the editing. The main blocker for me was to experiment with a voice over with subtitles which really made me procrastinate a lot on this.\n\nBali did add to the whole solo trip vibe for me, to explore myself and the world on my own.",
-      "image": "DarGQkGEvVi.jpg"
+      "image": "DarGQkGEvVi.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DarGQkGEvVi/01.mp4",
+          "poster": "DarGQkGEvVi/01-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DarGQkGEvVi/02.mp4",
+          "poster": "DarGQkGEvVi/02-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DarGQkGEvVi/03.mp4",
+          "poster": "DarGQkGEvVi/03-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DarGQkGEvVi/04.mp4",
+          "poster": "DarGQkGEvVi/04-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DarGQkGEvVi/05.mp4",
+          "poster": "DarGQkGEvVi/05-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DarGQkGEvVi/06.mp4",
+          "poster": "DarGQkGEvVi/06-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DarGQkGEvVi/07.mp4",
+          "poster": "DarGQkGEvVi/07-poster.jpg",
+          "w": 1280,
+          "h": 720
+        }
+      ],
+      "date": "2026-07-12T00:52:58.000Z",
+      "likes": 163
     },
     {
       "code": "DUPqalxEu--",
-      "kind": "post",
+      "kind": "carousel",
       "pinned": true,
       "url": "https://www.instagram.com/p/DUPqalxEu--/",
       "caption": "Mulki left me with salt in my hair, bruises on my knees, and memories I’ll be holding onto for a long time.\n\nWent there to learn surfing, came back learning how to fall, laugh, and try again. Met new people, shared the best kind of chaos with my closest friends, and lived a few days that felt bigger than they should’ve been. Sore, sunburnt, and completely happy. I’d do it all again.\n.\n.\n.\n.\n.\n[Mulki] [Surf Trip] [Learning to Surf] [Surfing India] [Beach Days] [Salt in My Hair] [Bruised but Happy] [Travel Diaries] [Friends and Waves] [Coastal Karnataka] [Beginner Surfer] [Wipeouts and Laughs] [Sunburnt and Smiling] [Short Trip] [Ocean Therapy]",
-      "image": "DUPqalxEu--.jpg"
+      "image": "DUPqalxEu--.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/01.mp4",
+          "poster": "DUPqalxEu--/01-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/02.mp4",
+          "poster": "DUPqalxEu--/02-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/03.mp4",
+          "poster": "DUPqalxEu--/03-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/04.mp4",
+          "poster": "DUPqalxEu--/04-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/05.mp4",
+          "poster": "DUPqalxEu--/05-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/06.mp4",
+          "poster": "DUPqalxEu--/06-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/07.mp4",
+          "poster": "DUPqalxEu--/07-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/08.mp4",
+          "poster": "DUPqalxEu--/08-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/09.mp4",
+          "poster": "DUPqalxEu--/09-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DUPqalxEu--/10.mp4",
+          "poster": "DUPqalxEu--/10-poster.jpg",
+          "w": 640,
+          "h": 360
+        }
+      ],
+      "date": "2026-02-02T06:01:49.000Z",
+      "likes": 189
     },
     {
       "code": "DSwUpHWkpQ_",
@@ -93,7 +162,18 @@
       "pinned": true,
       "url": "https://www.instagram.com/reel/DSwUpHWkpQ_/",
       "caption": "I started playing back my Synthesizer some days back and this was the first song i wanted to perfect. The audio and video might not seem in sync as the audio was dedicatedly recorded before hand and I like things cinematic so yeah here we go with both my art combined but in an out of sync way lol. Hope you guys enjoy both with separate worldviews.\n\n[Experience by ludvico einaudi]",
-      "image": "DSwUpHWkpQ_.jpg"
+      "image": "DSwUpHWkpQ_.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DSwUpHWkpQ_/0.mp4",
+          "poster": "DSwUpHWkpQ_/0-poster.jpg",
+          "w": 1280,
+          "h": 720
+        }
+      ],
+      "date": "2025-12-27T05:25:12.000Z",
+      "likes": 87
     },
     {
       "code": "DeCafEvElQ3",
@@ -101,7 +181,74 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DeCafEvElQ3/",
       "caption": "the twist is, you spend your whole life trying to be someone, only to find out you are not a \"someone\" at all. you are a collection of moments.\ni am only what i have experienced in this lifetime. i am the taste of a bad meal in a strange city, the warmth of a stranger's table, the ache of a long walk home, the kindness showed to a random bystander and the quiet magic of a midnight conversation.\nthat is all there is, and all there ever will be",
-      "image": "DeCafEvElQ3.jpg"
+      "image": "DeCafEvElQ3.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DeCafEvElQ3/01.mp4",
+          "poster": "DeCafEvElQ3/01-poster.jpg",
+          "w": 720,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DeCafEvElQ3/02.mp4",
+          "poster": "DeCafEvElQ3/02-poster.jpg",
+          "w": 720,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DeCafEvElQ3/03.mp4",
+          "poster": "DeCafEvElQ3/03-poster.jpg",
+          "w": 720,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DeCafEvElQ3/04.mp4",
+          "poster": "DeCafEvElQ3/04-poster.jpg",
+          "w": 720,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DeCafEvElQ3/05.mp4",
+          "poster": "DeCafEvElQ3/05-poster.jpg",
+          "w": 720,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DeCafEvElQ3/06.mp4",
+          "poster": "DeCafEvElQ3/06-poster.jpg",
+          "w": 720,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DeCafEvElQ3/07.mp4",
+          "poster": "DeCafEvElQ3/07-poster.jpg",
+          "w": 720,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DeCafEvElQ3/08.mp4",
+          "poster": "DeCafEvElQ3/08-poster.jpg",
+          "w": 720,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DeCafEvElQ3/09.mp4",
+          "poster": "DeCafEvElQ3/09-poster.jpg",
+          "w": 720,
+          "h": 720
+        }
+      ],
+      "date": "2026-10-03T15:46:26.000Z",
+      "likes": 104
     },
     {
       "code": "Db3GmRxNVZ1",
@@ -109,7 +256,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/Db3GmRxNVZ1/",
       "caption": "Touched grass too much, now I gotta runaway",
-      "image": "Db3GmRxNVZ1.jpg"
+      "image": "Db3GmRxNVZ1.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/Db3GmRxNVZ1/0.mp4",
+          "poster": "Db3GmRxNVZ1/0-poster.jpg",
+          "w": 720,
+          "h": 1280
+        }
+      ],
+      "date": "2026-08-10T13:18:52.000Z",
+      "likes": 107
     },
     {
       "code": "DZxElhoyTCg",
@@ -117,7 +275,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/DZxElhoyTCg/",
       "caption": "No problem! Here's the information about the Nissan GT-R R35: The Nissan GT-R R35 is a legendary high-performance sports car celebrated for its advanced all-wheel-drive system and exceptional speed. Powered by a twin-turbocharged 3.8-liter V6 engine, it produces over 565 horsepower. Acceleration from 0 to 60 mph takes just 2.9 seconds, featuring an advanced dual-clutch transmission. It incorporates sophisticated aerodynamics and ATTESA E-TS traction control to ensure maximum stability during extreme driving. It is widely considered one of the most iconic supercar killers in automotive history.",
-      "image": "DZxElhoyTCg.jpg"
+      "image": "DZxElhoyTCg.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DZxElhoyTCg/0.mp4",
+          "poster": "DZxElhoyTCg/0-poster.jpg",
+          "w": 720,
+          "h": 1280
+        }
+      ],
+      "date": "2026-06-19T12:06:19.000Z",
+      "likes": 94
     },
     {
       "code": "DVWcgROEkzr",
@@ -125,7 +294,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/DVWcgROEkzr/",
       "caption": "Most people talk about grief like it’s a problem to solve. Either you outrun it, or you collapse under it. As if those are the only endings available.\nBut sometimes it’s neither.\nSometimes it’s quieter than that. It sits beside you at breakfast. It walks with you to work. It shows up in small pauses and familiar songs. It doesn’t disappear, and it doesn’t have to.\nLiving with grief isn’t dramatic. It’s ordinary. It’s learning the shape of it, making space for it, and still choosing to move forward. Not because it hurts less — but because life keeps asking you to participate.\nThere’s a strange strength in that. Not defeating it. Not denying it. Just carrying it gently, and continuing anyway.",
-      "image": "DVWcgROEkzr.jpg"
+      "image": "DVWcgROEkzr.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DVWcgROEkzr/0.mp4",
+          "poster": "DVWcgROEkzr/0-poster.jpg",
+          "w": 360,
+          "h": 640
+        }
+      ],
+      "date": "2026-03-01T17:46:45.000Z",
+      "likes": 62
     },
     {
       "code": "DTK2lKPkuKW",
@@ -133,7 +313,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/DTK2lKPkuKW/",
       "caption": "Our experiences define our love and our love defines our experiences",
-      "image": "DTK2lKPkuKW.jpg"
+      "image": "DTK2lKPkuKW.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DTK2lKPkuKW/0.mp4",
+          "poster": "DTK2lKPkuKW/0-poster.jpg",
+          "w": 360,
+          "h": 360
+        }
+      ],
+      "date": "2026-01-06T12:45:23.000Z",
+      "likes": 82
     },
     {
       "code": "DRQ3XT0E0t4",
@@ -141,7 +332,15 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DRQ3XT0E0t4/",
       "caption": "Love isn't rare, its just different.\n\nMaybe different and rare are the same thing in the end when you yearn for something enough",
-      "image": "DRQ3XT0E0t4.jpg"
+      "image": "DRQ3XT0E0t4.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DRQ3XT0E0t4/01.jpg"
+        }
+      ],
+      "date": "2025-11-20T03:40:12.000Z",
+      "likes": 77
     },
     {
       "code": "DN-T3IdEiQU",
@@ -149,7 +348,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/DN-T3IdEiQU/",
       "caption": "My vision throughout Vietnam was to capture a sense of what Christopher Doyle and Wong Kar-Wai saw in early 90s\n\nA sense of loneliness in a city of lights and cheap opportunities",
-      "image": "DN-T3IdEiQU.jpg"
+      "image": "DN-T3IdEiQU.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DN-T3IdEiQU/0.mp4",
+          "poster": "DN-T3IdEiQU/0-poster.jpg",
+          "w": 360,
+          "h": 640
+        }
+      ],
+      "date": "2025-08-30T09:14:54.000Z",
+      "likes": 88
     },
     {
       "code": "DNdY20NShjd",
@@ -157,7 +367,39 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DNdY20NShjd/",
       "caption": "Chalo chutti khatam 😔\nVietnam Me dump",
-      "image": "DNdY20NShjd.jpg"
+      "image": "DNdY20NShjd.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DNdY20NShjd/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DNdY20NShjd/02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DNdY20NShjd/03.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DNdY20NShjd/04.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DNdY20NShjd/05.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DNdY20NShjd/06.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DNdY20NShjd/07.jpg"
+        }
+      ],
+      "date": "2025-08-17T14:18:00.000Z",
+      "likes": 144
     },
     {
       "code": "DMAk4HPSkyL",
@@ -165,7 +407,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/DMAk4HPSkyL/",
       "caption": "Experimenting with lighting gone right. I should play with photo mode on Alan wake 2 more often",
-      "image": "DMAk4HPSkyL.jpg"
+      "image": "DMAk4HPSkyL.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DMAk4HPSkyL/0.mp4",
+          "poster": "DMAk4HPSkyL/0-poster.jpg",
+          "w": 360,
+          "h": 640
+        }
+      ],
+      "date": "2025-07-12T13:17:53.000Z",
+      "likes": 82
     },
     {
       "code": "DKEcdp9S_1x",
@@ -173,7 +426,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/DKEcdp9S_1x/",
       "caption": "Haan bhai finally edited it\n\n#coorg #coorgscotlandofindia😍😍😍❤️❤️ #coorgdiaries",
-      "image": "DKEcdp9S_1x.jpg"
+      "image": "DKEcdp9S_1x.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DKEcdp9S_1x/0.mp4",
+          "poster": "DKEcdp9S_1x/0-poster.jpg",
+          "w": 360,
+          "h": 640
+        }
+      ],
+      "date": "2025-05-25T08:16:33.000Z",
+      "likes": 114
     },
     {
       "code": "DHytUdGSBfo",
@@ -181,7 +445,59 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DHytUdGSBfo/",
       "caption": "Coorg 2025 - Day 1\n\nFeaturing @chaturvedi_ji28 @dvn_oshin_",
-      "image": "DHytUdGSBfo.jpg"
+      "image": "DHytUdGSBfo.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/03.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/04.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/05.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/06.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/07.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/08.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/09.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/10.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/11.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DHytUdGSBfo/12.jpg"
+        }
+      ],
+      "date": "2025-03-29T17:52:29.000Z",
+      "likes": 99
     },
     {
       "code": "DHYi8Yat1wy",
@@ -189,7 +505,81 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DHYi8Yat1wy/",
       "caption": "You know what they say, impromptu trips are the best\n\nfeat. : @aishanii.pachauri",
-      "image": "DHYi8Yat1wy.jpg"
+      "image": "DHYi8Yat1wy.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/01.mp4",
+          "poster": "DHYi8Yat1wy/01-poster.jpg",
+          "w": 640,
+          "h": 360
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/02.mp4",
+          "poster": "DHYi8Yat1wy/02-poster.jpg",
+          "w": 640,
+          "h": 360
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/03.mp4",
+          "poster": "DHYi8Yat1wy/03-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/04.mp4",
+          "poster": "DHYi8Yat1wy/04-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/05.mp4",
+          "poster": "DHYi8Yat1wy/05-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/06.mp4",
+          "poster": "DHYi8Yat1wy/06-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/07.mp4",
+          "poster": "DHYi8Yat1wy/07-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/08.mp4",
+          "poster": "DHYi8Yat1wy/08-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/09.mp4",
+          "poster": "DHYi8Yat1wy/09-poster.jpg",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DHYi8Yat1wy/10.mp4",
+          "poster": "DHYi8Yat1wy/10-poster.jpg",
+          "w": 1280,
+          "h": 720
+        }
+      ],
+      "date": "2025-03-19T14:01:34.000Z",
+      "likes": 197
     },
     {
       "code": "DGX5MQPyf3o",
@@ -197,7 +587,35 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DGX5MQPyf3o/",
       "caption": "Dilli - Feb 2025",
-      "image": "DGX5MQPyf3o.jpg"
+      "image": "DGX5MQPyf3o.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DGX5MQPyf3o/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DGX5MQPyf3o/02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DGX5MQPyf3o/03.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DGX5MQPyf3o/04.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DGX5MQPyf3o/05.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DGX5MQPyf3o/06.jpg"
+        }
+      ],
+      "date": "2025-02-22T11:25:20.000Z",
+      "likes": 86
     },
     {
       "code": "DGNWxB1yJoU",
@@ -205,7 +623,15 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DGNWxB1yJoU/",
       "caption": "Mori memorias non somnia ~ Die with memories not dreams.",
-      "image": "DGNWxB1yJoU.jpg"
+      "image": "DGNWxB1yJoU.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DGNWxB1yJoU/01.jpg"
+        }
+      ],
+      "date": "2025-02-18T09:12:07.000Z",
+      "likes": 75
     },
     {
       "code": "DFu4bEyy0tU",
@@ -213,7 +639,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/DFu4bEyy0tU/",
       "caption": "Here i go\nPouring my heart again",
-      "image": "DFu4bEyy0tU.jpg"
+      "image": "DFu4bEyy0tU.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DFu4bEyy0tU/0.mp4",
+          "poster": "DFu4bEyy0tU/0-poster.jpg",
+          "w": 720,
+          "h": 1280
+        }
+      ],
+      "date": "2025-02-06T13:12:16.000Z",
+      "likes": 52
     },
     {
       "code": "DFk-NAbSQAE",
@@ -221,7 +658,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/DFk-NAbSQAE/",
       "caption": "Just a first cinematic vlog. ✨✨\n\nft : @___samadkhan_ and harsh",
-      "image": "DFk-NAbSQAE.jpg"
+      "image": "DFk-NAbSQAE.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DFk-NAbSQAE/0.mp4",
+          "poster": "DFk-NAbSQAE/0-poster.jpg",
+          "w": 720,
+          "h": 1280
+        }
+      ],
+      "date": "2025-02-02T16:50:42.000Z",
+      "likes": 84
     },
     {
       "code": "DFT_V5LyS_s",
@@ -229,7 +677,23 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DFT_V5LyS_s/",
       "caption": "Straight from my journal for y’all ✨",
-      "image": "DFT_V5LyS_s.jpg"
+      "image": "DFT_V5LyS_s.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DFT_V5LyS_s/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DFT_V5LyS_s/02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DFT_V5LyS_s/03.jpg"
+        }
+      ],
+      "date": "2025-01-27T02:30:00.000Z",
+      "likes": 54
     },
     {
       "code": "DFNxNtuyYdo",
@@ -237,7 +701,35 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DFNxNtuyYdo/",
       "caption": "Where less says more—simplicity captured in every frame.",
-      "image": "DFNxNtuyYdo.jpg"
+      "image": "DFNxNtuyYdo.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DFNxNtuyYdo/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DFNxNtuyYdo/02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DFNxNtuyYdo/03.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DFNxNtuyYdo/04.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DFNxNtuyYdo/05.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DFNxNtuyYdo/06.jpg"
+        }
+      ],
+      "date": "2025-01-24T16:31:50.000Z",
+      "likes": 83
     },
     {
       "code": "DEuuSNLy1oI",
@@ -245,7 +737,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/DEuuSNLy1oI/",
       "caption": "No honey you are not a hardened obsessed detective from Louisiana.\nLiterally me :",
-      "image": "DEuuSNLy1oI.jpg"
+      "image": "DEuuSNLy1oI.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/DEuuSNLy1oI/0.mp4",
+          "poster": "DEuuSNLy1oI/0-poster.jpg",
+          "w": 720,
+          "h": 1280
+        }
+      ],
+      "date": "2025-01-12T15:14:37.000Z",
+      "likes": 90
     },
     {
       "code": "DEr9ZeZytem",
@@ -253,7 +756,19 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DEr9ZeZytem/",
       "caption": "We going Tahiti with this one, Pardner\n\nP.C. : @prat._._.k",
-      "image": "DEr9ZeZytem.jpg"
+      "image": "DEr9ZeZytem.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DEr9ZeZytem/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DEr9ZeZytem/02.jpg"
+        }
+      ],
+      "date": "2025-01-11T13:24:07.000Z",
+      "likes": 102
     },
     {
       "code": "DEpvMBQSpvo",
@@ -261,7 +776,23 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DEpvMBQSpvo/",
       "caption": "✨🌄",
-      "image": "DEpvMBQSpvo.jpg"
+      "image": "DEpvMBQSpvo.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DEpvMBQSpvo/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DEpvMBQSpvo/02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DEpvMBQSpvo/03.jpg"
+        }
+      ],
+      "date": "2025-01-10T16:41:28.000Z",
+      "likes": 56
     },
     {
       "code": "DDUvRTbSDrT",
@@ -269,7 +800,74 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DDUvRTbSDrT/",
       "caption": "Coolest Boys from section-D",
-      "image": "DDUvRTbSDrT.jpg"
+      "image": "DDUvRTbSDrT.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/03.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/04.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/05.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/06.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/07.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/08.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/09.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/10.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/11.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/12.jpg"
+        },
+        {
+          "type": "video",
+          "src": "/media/instagram/DDUvRTbSDrT/13.mp4",
+          "poster": "DDUvRTbSDrT/13-poster.jpg",
+          "w": 720,
+          "h": 900
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/14.jpg"
+        },
+        {
+          "type": "image",
+          "src": "DDUvRTbSDrT/15.jpg"
+        }
+      ],
+      "date": "2024-12-08T16:26:45.000Z",
+      "likes": 89
     },
     {
       "code": "DC_MRyuyspB",
@@ -277,7 +875,15 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DC_MRyuyspB/",
       "caption": "Musafirpana aur mauj masti nhi rukni chahiye",
-      "image": "DC_MRyuyspB.jpg"
+      "image": "DC_MRyuyspB.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DC_MRyuyspB/01.jpg"
+        }
+      ],
+      "date": "2024-11-30T07:36:55.000Z",
+      "likes": 83
     },
     {
       "code": "DCnqpwNSNSB",
@@ -285,7 +891,15 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/DCnqpwNSNSB/",
       "caption": "🌅 🏝️",
-      "image": "DCnqpwNSNSB.jpg"
+      "image": "DCnqpwNSNSB.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "DCnqpwNSNSB/01.jpg"
+        }
+      ],
+      "date": "2024-11-21T04:20:34.000Z",
+      "likes": 81
     },
     {
       "code": "C6TUpKkPB0o",
@@ -293,7 +907,51 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/C6TUpKkPB0o/",
       "caption": "What a 23rd ✨",
-      "image": "C6TUpKkPB0o.jpg"
+      "image": "C6TUpKkPB0o.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/03.jpg"
+        },
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/04.jpg"
+        },
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/05.jpg"
+        },
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/06.jpg"
+        },
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/07.jpg"
+        },
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/08.jpg"
+        },
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/09.jpg"
+        },
+        {
+          "type": "image",
+          "src": "C6TUpKkPB0o/10.jpg"
+        }
+      ],
+      "date": "2024-04-28T10:32:17.000Z",
+      "likes": 117
     },
     {
       "code": "C5vcU8-PKF1",
@@ -301,7 +959,15 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/C5vcU8-PKF1/",
       "caption": "Where do I see it ending? With me on top. Like always.",
-      "image": "C5vcU8-PKF1.jpg"
+      "image": "C5vcU8-PKF1.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "C5vcU8-PKF1/01.jpg"
+        }
+      ],
+      "date": "2024-04-14T12:06:46.000Z",
+      "likes": 83
     },
     {
       "code": "C5mmyzhvvyd",
@@ -309,7 +975,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/C5mmyzhvvyd/",
       "caption": "Embrace your muse. When rain whispers against your window, write about it. Call it a dance of droplets, nature’s gentle song. If it calms your spirit, it’s meaningful. \n\nYou’re tuned into the world’s quiet beauty; be proud of that. Noticing small wonders, you create a tapestry of gratitude that makes the world warmer. Shadows on a loved one’s face, the hush before dawn, if these moments stir you, hold them dear. They remind you that joy is woven into existence. \n\nCelebrate seeing the universe in a grain of sand, feeling eternity in a moment. This pursuit of beauty, this joy in simple things, it’s precious. Nurture it, for it brings you to life.",
-      "image": "C5mmyzhvvyd.jpg"
+      "image": "C5mmyzhvvyd.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/C5mmyzhvvyd/0.mp4",
+          "poster": "C5mmyzhvvyd/0-poster.jpg",
+          "w": 720,
+          "h": 1280
+        }
+      ],
+      "date": "2024-04-11T01:51:00.000Z",
+      "likes": 45
     },
     {
       "code": "C2ZQb5_vk1L",
@@ -317,7 +994,18 @@
       "pinned": false,
       "url": "https://www.instagram.com/reel/C2ZQb5_vk1L/",
       "caption": "From Nietzsche’s “Thus Spoke Zarathustra,” \n\n“Like the solitary peaks that stand tall and undaunted, let your spirit rise above the mists of conformity. In the symphony of existence, be not just another note that fades into the echoes of the multitude, but a distinct melody that sings the truth of your unique essence. The society around you is but a canvas; your will and capabilities, the brush and colors with which you paint your destiny. Forge your path with the fire of your own potential, for in the vast landscape of life, it is the self-crafted journey that leads to the most majestic of vistas.”\n\nMEANING:\n\nThink of yourself as a tall mountain, standing strong by yourself. Don’t just follow what everyone else is doing. Instead, be special and true to who you are. Society is like a background, and you have the power to create your own story on it. Use your own skills and decisions to shape your life. Just like a mountain makes its own way through the sky, you should make your own path in life. When you do things your own way, you’ll reach amazing places.\n\n#motivation #hope #career #nietzsche #motivation💪 #careergrowth",
-      "image": "C2ZQb5_vk1L.jpg"
+      "image": "C2ZQb5_vk1L.jpg",
+      "slides": [
+        {
+          "type": "video",
+          "src": "/media/instagram/C2ZQb5_vk1L/0.mp4",
+          "poster": "C2ZQb5_vk1L/0-poster.jpg",
+          "w": 720,
+          "h": 1280
+        }
+      ],
+      "date": "2024-01-22T07:53:32.000Z",
+      "likes": 78
     },
     {
       "code": "Ctjbz7Qv9Nt",
@@ -325,7 +1013,15 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/Ctjbz7Qv9Nt/",
       "caption": "Post aisa karo ki 4 log bolein ek hi pose aata hai kya",
-      "image": "Ctjbz7Qv9Nt.jpg"
+      "image": "Ctjbz7Qv9Nt.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "Ctjbz7Qv9Nt/01.jpg"
+        }
+      ],
+      "date": "2023-06-16T13:54:39.000Z",
+      "likes": 106
     },
     {
       "code": "CtHHHabv5uZ",
@@ -333,7 +1029,15 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/CtHHHabv5uZ/",
       "caption": "It's giving main roz nashte mein avocado toast khata hoon tum kaun ho?",
-      "image": "CtHHHabv5uZ.jpg"
+      "image": "CtHHHabv5uZ.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "CtHHHabv5uZ/01.jpg"
+        }
+      ],
+      "date": "2023-06-05T13:55:04.000Z",
+      "likes": 100
     },
     {
       "code": "CsdA1XmvSe5",
@@ -341,7 +1045,15 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/CsdA1XmvSe5/",
       "caption": "",
-      "image": "CsdA1XmvSe5.jpg"
+      "image": "CsdA1XmvSe5.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "CsdA1XmvSe5/01.jpg"
+        }
+      ],
+      "date": "2023-05-20T05:32:04.000Z",
+      "likes": 88
     },
     {
       "code": "CmPd0WAIPIA",
@@ -349,7 +1061,19 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/CmPd0WAIPIA/",
       "caption": "😼",
-      "image": "CmPd0WAIPIA.jpg"
+      "image": "CmPd0WAIPIA.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "CmPd0WAIPIA/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "CmPd0WAIPIA/02.jpg"
+        }
+      ],
+      "date": "2022-12-16T20:07:36.000Z",
+      "likes": 91
     },
     {
       "code": "CfW9V-HvJPC",
@@ -357,7 +1081,23 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/CfW9V-HvJPC/",
       "caption": "Veni Vidi Vici🏛\nAbsolute MadLads aint?\n\n @_devtyagi_ aka The best hackathon partner.",
-      "image": "CfW9V-HvJPC.jpg"
+      "image": "CfW9V-HvJPC.jpg",
+      "slides": [
+        {
+          "type": "image",
+          "src": "CfW9V-HvJPC/01.jpg"
+        },
+        {
+          "type": "image",
+          "src": "CfW9V-HvJPC/02.jpg"
+        },
+        {
+          "type": "image",
+          "src": "CfW9V-HvJPC/03.jpg"
+        }
+      ],
+      "date": "2022-06-28T18:18:00.000Z",
+      "likes": 74
     },
     {
       "code": "CbOCByyvUlv",
@@ -365,7 +1105,15 @@
       "pinned": false,
       "url": "https://www.instagram.com/p/CbOCByyvUlv/",
       "caption": "Should've posted this a long time ago\n\nP.c: @__mohit.23__",
-      "image": "CbOCByyvUlv.webp"
+      "image": "CbOCByyvUlv.webp",
+      "slides": [
+        {
+          "type": "image",
+          "src": "CbOCByyvUlv/01.webp"
+        }
+      ],
+      "date": "2022-03-17T21:00:12.000Z",
+      "likes": 73
     }
   ]
 }

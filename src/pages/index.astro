@@ -22,7 +22,7 @@ const experience = await getExperienceSorted();
 <BaseLayout current="home">
   <Boot />
   <Vault profile={profile} />
-  <Desktop profile={profile} projects={projects} blog={blog} />
+  <Desktop profile={profile} projects={projects} blog={blog} experience={experience} />
   <SkillRings rings={skillsRings} />
   <Latest blog={blog} experience={experience} />
 </BaseLayout>

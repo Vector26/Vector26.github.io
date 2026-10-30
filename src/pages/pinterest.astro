@@ -1,0 +1,97 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import pinterest from '../data/pinterest.json';
+
+type RawPin = { id: string; title: string; alt: string; image: string; video?: string; w?: number; h?: number };
+
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/pinterest/*.jpg', { eager: true });
+const asset = (name: string): ImageMetadata => {
+  const mod = files[`../assets/pinterest/${name}`];
+  if (!mod) throw new Error(`Missing Pinterest asset: ${name}`);
+  return mod.default;
+};
+
+const GRID_WIDTHS = [480, 800, 1200];
+
+const pins = await Promise.all(
+  (pinterest.pins as RawPin[]).map(async (p) => {
+    const src = asset(p.image);
+    const widths = GRID_WIDTHS.filter((w) => w < src.width);
+    const [grid, full] = await Promise.all([
+      getImage({ src, widths: widths.length ? widths : [src.width], sizes: '(max-width: 640px) 50vw, (max-width: 1100px) 33vw, 25vw', format: 'webp', quality: 80 }),
+      getImage({ src, width: Math.min(2400, src.width), format: 'webp', quality: 86 }),
+    ]);
+    return {
+      id: p.id,
+      title: p.title,
+      alt: p.alt || p.title,
+      w: src.width,
+      h: src.height,
+      grid: { src: grid.src, srcset: grid.srcSet.attribute, sizes: grid.attributes.sizes as string },
+      full: full.src,
+      video: p.video ?? null,
+    };
+  }),
+);
+
+const featured = pins.find((p) => !p.video && p.w > p.h * 1.2) ?? pins[0];
+const hero = await getImage({ src: asset(`${featured.id}.jpg`), widths: [1200, 1800, 2400].filter((w) => w <= featured.w), sizes: '100vw', format: 'webp', quality: 82 });
+const avatar = pinterest.profile.avatar ? await getImage({ src: asset(pinterest.profile.avatar), width: 160, format: 'webp' }) : null;
+const { profile } = pinterest;
+const viewerData = pins.map(({ title, full, video, w, h }) => ({ title, full, video, w, h }));
+---
+<BaseLayout
+  title="Pinterest"
+  description={`${profile.name} — ${profile.bio}. Photographs and short films by Hritik Rai.`}
+  current="pinterest"
+  image={hero.src}
+>
+  <section class="pin-hero">
+    <img class="pin-hero__img" src={hero.src} srcset={hero.srcSet.attribute} sizes="100vw" alt={featured.alt} width={featured.w} height={featured.h} fetchpriority="high" />
+    <div class="pin-hero__shade"></div>
+    <div class="wrap pin-hero__copy">
+      <p class="eyebrow">Pinterest · @{profile.handle}</p>
+      <h1 class="pin-hero__title" data-cipher>{profile.name}</h1>
+      <p class="pin-hero__bio">{profile.bio}</p>
+      <p class="pin-hero__meta mono">
+        {avatar && <img src={avatar.src} alt="" width="28" height="28" />}
+        <span>{pins.length} pins · {pins.filter((p) => p.video).length} films</span>
+        <a href={profile.url} target="_blank" rel="noopener">Follow on Pinterest ↗</a>
+      </p>
+      <p class="pin-hero__caption mono faint">{featured.title}</p>
+    </div>
+  </section>
+
+  <div class="pin-wall">
+    <ul class="pin-grid">
+      {pins.map((p, i) => (
+        <li class="pin">
+          <button type="button" class="pin__btn" data-i={i} aria-label={`Open “${p.title}”`}>
+            <img src={p.grid.src} srcset={p.grid.srcset} sizes={p.grid.sizes} alt={p.alt} width={p.w} height={p.h} loading={i < 8 ? 'eager' : 'lazy'} decoding="async" />
+            {p.video && <video class="pin__video" data-src={p.video} muted loop playsinline preload="none" aria-hidden="true"></video>}
+            {p.video && <span class="pin__badge mono">▶</span>}
+            <span class="pin__title">{p.title}</span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <dialog class="pin-view" aria-label="Pin">
+    <figure class="pin-view__figure">
+      <div class="pin-view__media"></div>
+      <figcaption class="pin-view__cap">
+        <span class="pin-view__title"></span>
+        <span class="pin-view__count mono faint"></span>
+      </figcaption>
+    </figure>
+    <button class="pin-view__nav pin-view__prev" type="button" aria-label="Previous">‹</button>
+    <button class="pin-view__nav pin-view__next" type="button" aria-label="Next">›</button>
+    <button class="pin-view__close" type="button" aria-label="Close">×</button>
+  </dialog>
+  <script type="application/json" id="pin-data" set:html={JSON.stringify(viewerData)} />
+</BaseLayout>
+
+<script src="../scripts/pinterest-viewer.ts"></script>

@@ -4,7 +4,8 @@ import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import instagram from '../data/instagram.json';
 
-type Kind = 'photo' | 'carousel' | 'reel' | 'post';
+type Kind = 'photo' | 'carousel' | 'reel';
+type RawSlide = { type: 'image'; src: string } | { type: 'video'; src: string; poster: string; w: number; h: number };
 
 const files = import.meta.glob<{ default: ImageMetadata }>('../assets/instagram/**/*.{jpg,webp}', { eager: true });
 const asset = (name: string): ImageMetadata => {
@@ -12,51 +13,49 @@ const asset = (name: string): ImageMetadata => {
   if (!mod) throw new Error(`Missing Instagram asset: ${name}`);
   return mod.default;
 };
+const large = async (src: ImageMetadata) =>
+  (await getImage({ src, width: Math.min(1440, src.width), format: 'webp', quality: 80 })).src;
 
-const { profile, highlights } = instagram;
+const { profile } = instagram;
 
 const posts = await Promise.all(
   instagram.posts.map(async (p) => {
-    const src = asset(p.image);
-    const [thumb, full] = await Promise.all([
-      getImage({ src, width: 540, format: 'webp', quality: 72 }),
-      getImage({ src, width: Math.min(1440, src.width), format: 'webp', quality: 80 }),
-    ]);
+    const raw = p.slides as RawSlide[];
+    const slides = await Promise.all(
+      raw.map(async (s) => {
+        if (s.type === 'image') {
+          const img = asset(s.src);
+          return { type: 'image' as const, src: await large(img), w: img.width, h: img.height };
+        }
+        return { type: 'video' as const, src: s.src, poster: await large(asset(s.poster)), w: s.w, h: s.h };
+      }),
+    );
+    const first = raw[0];
+    const cover = asset(first.type === 'image' ? first.src : first.poster);
+    const thumb = await getImage({ src: cover, width: 540, format: 'webp', quality: 72 });
     return {
-      ...p,
+      code: p.code,
+      url: p.url,
       kind: p.kind as Kind,
+      pinned: p.pinned,
+      caption: p.caption,
+      date: p.date,
       thumb: thumb.src,
-      full: full.src,
-      width: src.width,
-      height: src.height,
+      preview: first.type === 'video' ? first.src : null,
+      slides,
     };
   }),
 );
 
-const hl = await Promise.all(
-  highlights.map(async (h) => ({
-    title: h.title,
-    src: (await getImage({ src: asset(h.image), width: 150, format: 'webp' })).src,
-  })),
-);
-
 const avatar = profile.avatar ? await getImage({ src: asset(profile.avatar), width: 320, format: 'webp' }) : null;
+const videoCount = posts.reduce((n, p) => n + p.slides.filter((s) => s.type === 'video').length, 0);
 
-const viewerData = posts.map((p) => ({
-  kind: p.kind,
-  url: p.url,
-  embed: `https://www.instagram.com/p/${p.code}/embed/`,
-  full: p.full,
-  width: p.width,
-  height: p.height,
-  caption: p.caption,
-}));
-
-const kindLabel: Record<Kind, string> = { photo: 'Photo', carousel: 'Carousel', reel: 'Reel', post: 'Post' };
+const viewerData = posts.map(({ url, kind, caption, date, slides }) => ({ url, kind, caption, date, slides }));
+const kindLabel: Record<Kind, string> = { photo: 'Photo', carousel: 'Carousel', reel: 'Reel' };
 ---
 <BaseLayout
   title="Instagram"
-  description="Frames from Hritik Rai's Instagram — cinematography, travel, and photos."
+  description="Hritik Rai's Instagram — reels, travel films, and photos, playable right here."
   current="instagram"
 >
   <div class="wrap ig">
@@ -68,46 +67,37 @@ const kindLabel: Record<Kind, string> = { photo: 'Photo', carousel: 'Carousel', 
         <p class="ig__bio">
           {profile.bio.map((line) => <span>{line}</span>)}
         </p>
-        <p class="ig__stats mono faint">{profile.posts} posts · {profile.category}</p>
-        <a class="btn btn--primary" href={profile.url} target="_blank" rel="noopener">Follow on Instagram ↗</a>
+        <p class="ig__stats mono faint">{posts.length} posts · {videoCount} films · {profile.category}</p>
+        <a class="btn" href={profile.url} target="_blank" rel="noopener">@{profile.handle} on Instagram ↗</a>
       </div>
     </header>
-
-    <ul class="ig__highlights" aria-label="Story highlights">
-      {hl.map((h) => (
-        <li>
-          <a href={profile.url} target="_blank" rel="noopener" class="ig__hl">
-            <img src={h.src} alt="" width="72" height="72" loading="lazy" />
-            <span>{h.title}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
 
     <ul class="ig__grid">
       {posts.map((p, i) => (
         <li>
           <a class="ig__tile" href={p.url} target="_blank" rel="noopener" data-i={i} aria-label={`${kindLabel[p.kind]}: ${p.caption.slice(0, 80) || 'Instagram post'}`}>
-            <img src={p.thumb} alt="" width="540" height={Math.round((540 * p.height) / p.width)} loading={i < 6 ? 'eager' : 'lazy'} decoding="async" />
+            <img src={p.thumb} alt="" width="540" height="675" loading={i < 6 ? 'eager' : 'lazy'} decoding="async" />
+            {p.preview && <video class="ig__preview" data-src={p.preview} muted loop playsinline preload="none" aria-hidden="true"></video>}
             <span class="ig__badges">
               {p.pinned && <span class="ig__badge mono">Pinned</span>}
               {p.kind === 'reel' && <span class="ig__badge mono">▶ Reel</span>}
-              {p.kind === 'carousel' && <span class="ig__badge mono">❏ Carousel</span>}
+              {p.kind === 'carousel' && <span class="ig__badge mono">❏ {p.slides.length}</span>}
             </span>
             {p.caption && <span class="ig__cap">{p.caption}</span>}
           </a>
         </li>
       ))}
     </ul>
-
-    <p class="ig__more">
-      <a class="btn" href={profile.url} target="_blank" rel="noopener">See all {profile.posts} posts on Instagram ↗</a>
-    </p>
   </div>
 
   <dialog class="ig-view" aria-label="Instagram post">
     <div class="ig-view__inner">
-      <div class="ig-view__media"></div>
+      <div class="ig-view__media">
+        <div class="ig-view__stage"></div>
+        <button class="ig-view__step ig-view__step--prev" type="button" aria-label="Previous slide">‹</button>
+        <button class="ig-view__step ig-view__step--next" type="button" aria-label="Next slide">›</button>
+        <div class="ig-view__dots" aria-hidden="true"></div>
+      </div>
       <aside class="ig-view__side">
         <div class="ig-view__who">
           {avatar && <img src={avatar.src} alt="" width="36" height="36" />}
@@ -115,8 +105,9 @@ const kindLabel: Record<Kind, string> = { photo: 'Photo', carousel: 'Carousel', 
           <span class="ig-view__kind mono faint"></span>
         </div>
         <p class="ig-view__caption"></p>
-        <div class="ig-view__actions">
-          <a class="btn btn--primary ig-view__open" href="#" target="_blank" rel="noopener">Open on Instagram ↗</a>
+        <div class="ig-view__foot">
+          <time class="ig-view__date mono faint"></time>
+          <a class="ig-view__open" href="#" target="_blank" rel="noopener">View on Instagram ↗</a>
         </div>
       </aside>
       <button class="ig-view__nav ig-view__prev" type="button" aria-label="Previous post">‹</button>
