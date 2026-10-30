@@ -1,4 +1,4 @@
-type Pin = { title: string; full: string; video: string | null; w: number; h: number };
+type Pin = { title: string; date: string; full: string; video: string | null; w: number; h: number };
 
 function initViewer(): void {
   const dialog = document.querySelector<HTMLDialogElement>('.pin-view');
@@ -8,6 +8,7 @@ function initViewer(): void {
   const media = dialog.querySelector<HTMLElement>('.pin-view__media')!;
   const title = dialog.querySelector<HTMLElement>('.pin-view__title')!;
   const count = dialog.querySelector<HTMLElement>('.pin-view__count')!;
+  const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
   let current = 0;
 
   const show = (i: number) => {
@@ -33,7 +34,7 @@ function initViewer(): void {
     node.height = pin.h;
     media.replaceChildren(node);
     title.textContent = pin.title;
-    count.textContent = `${current + 1} / ${pins.length}`;
+    count.textContent = `${fmt.format(new Date(pin.date))} · ${current + 1} / ${pins.length}`;
     const next = pins[(current + 1) % pins.length];
     if (!next.video) new Image().src = next.full;
   };

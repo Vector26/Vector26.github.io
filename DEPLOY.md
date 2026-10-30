@@ -27,6 +27,10 @@ git push origin HEAD:source
 
 `npm run build` runs `scripts/sync-substack.mjs` first. It pulls the RSS feed, cleans each post's HTML into `src/data/substack.json`, and refreshes `src/content/blog/`. If the feed is unreachable, the build continues with the last synced posts.
 
+## Pinterest sync
+
+`npm run build` also runs `scripts/sync-pinterest.mjs`, which mirrors the pins created by `hritik26rai` (newest first) using Pinterest's public web endpoint. It downloads only new pins, encodes new video pins with ffmpeg into `public/media/pinterest/`, and drops pins deleted on Pinterest. The workflow copies new videos into `master` under `/media/` and commits the synced data back to `source`. If Pinterest is unreachable, the build keeps the last synced pins.
+
 ## Instagram and Pinterest media
 
 Photos live in `src/assets/instagram/` and `src/assets/pinterest/` and go through the normal image pipeline. Video (~250 MB) lives in `public/media/`, which is gitignored on `source` and committed directly to `master` under `/media/`; the workflow never deletes it.
@@ -36,7 +40,6 @@ To refresh after re-importing:
 ```bash
 npm run import:instagram -- /path/to/Instagram.html
 npm run import:instagram-media -- <yt-dlp-dir> <encoded-dir>
-npm run import:pinterest -- <pins.json> <originals-dir> <encoded-dir> [avatar.jpg]
 # then copy public/media/ into a master checkout under media/, commit, push
 ```
 

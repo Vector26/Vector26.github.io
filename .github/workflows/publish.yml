@@ -39,7 +39,10 @@ jobs:
           cache: npm
           cache-dependency-path: src/package-lock.json
 
-      - name: Install and build (syncs Substack)
+      - name: Ensure ffmpeg (Pinterest sync)
+        run: command -v ffmpeg >/dev/null || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+
+      - name: Install and build (syncs Substack and Pinterest)
         working-directory: src
         run: npm ci && npm run build
 
@@ -49,6 +52,7 @@ jobs:
         run: |
           # /media (Instagram + Pinterest video) is committed straight to master, not built from source.
           rsync -a --delete --exclude '.git' --exclude '.github' --exclude '/media' ../src/dist/ ./
+          if [ -d ../src/public/media ]; then rsync -a ../src/public/media/ ./media/; fi
           git add -A
           if git diff --cached --quiet; then
             echo "No changes to publish."
@@ -66,3 +70,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" || echo "Pages build request failed; the push should still trigger a build."
+
+      - name: Save synced Pinterest pins to source
+        working-directory: src
+        run: |
+          git add src/data/pinterest.json src/assets/pinterest
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync Pinterest pins"
+          git push origin HEAD:source
