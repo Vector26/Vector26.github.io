@@ -1,3 +1,3 @@
 Contact: mailto:hritik.26.rai@gmail.com
 Preferred-Languages: en
-Canonical: https://vector26.github.io/.well-known/security.txt
+Canonical: https://hritikrai.com/.well-known/security.txt
