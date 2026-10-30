@@ -1,0 +1,126 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  profile: CollectionEntry<'profile'>['data'];
+  projects: CollectionEntry<'projects'>[];
+  blog: CollectionEntry<'blog'>[];
+}
+const { profile, projects, blog } = Astro.props;
+
+const termData = {
+  projects: projects.map((p) => ({
+    title: p.data.title,
+    href: p.data.url ?? p.data.repo,
+    meta: p.data.tags.join(', '),
+  })),
+  blog: blog.map((b) => ({
+    title: b.data.title,
+    href: new URL(`/substack/${b.id}`, Astro.site).href,
+    meta: b.data.pubDate.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }),
+  })),
+};
+---
+<section class="desk" id="desktop" aria-labelledby="desk-title">
+  <div class="wrap desk__head">
+    <p class="eyebrow">Desktop</p>
+    <h2 class="section-title" id="desk-title" data-cipher>Have a look around.</h2>
+    <p class="section-lead">A working terminal and a few apps. Type <span class="mono">help</span>, or open one from the Dock.</p>
+  </div>
+  <div class="desk__screen">
+    <div class="win win--terminal" data-app="terminal" style="left:12px;top:12px;width:min(520px,95%)">
+      <div class="win__bar">
+        <span class="win__lights">
+          <button class="win__btn win__btn--close" type="button" data-act="close" aria-label="Close"></button>
+          <button class="win__btn win__btn--min" type="button" data-act="min"></button>
+          <button class="win__btn win__btn--max" type="button" data-act="max"></button>
+        </span>
+        <span class="win__title">hritik — zsh</span>
+      </div>
+      <div class="win__body">
+        <div class="term">
+          <div class="term__output mono" role="log" aria-live="polite"></div>
+          <label class="term__inputline mono">
+            <span class="term__prompt">hritik@vector26 ~ % </span>
+            <input class="term__input" type="text" autocomplete="off" spellcheck="false" aria-label="Terminal input" placeholder="type 'help'" />
+          </label>
+          <script type="application/json" id="term-data" set:html={JSON.stringify(termData)} />
+        </div>
+      </div>
+    </div>
+
+    <div class="win win--finder" data-app="finder" hidden style="left:48px;top:48px;width:min(480px,95%)">
+      <div class="win__bar">
+        <span class="win__lights">
+          <button class="win__btn win__btn--close" type="button" data-act="close"></button>
+          <button class="win__btn win__btn--min" type="button" data-act="min"></button>
+          <button class="win__btn win__btn--max" type="button" data-act="max"></button>
+        </span>
+        <span class="win__title">Projects</span>
+      </div>
+      <div class="win__body">
+        {projects.map((p) => (
+          <a class="finder__row" href={p.data.url ?? p.data.repo ?? '/projects'} target={p.data.url ? '_blank' : undefined} rel="noopener">
+            <span>{p.data.title}</span>
+            <span class="mono faint">{p.data.tags.join(' · ')}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="win win--notes" data-app="notes" hidden style="left:84px;top:36px;width:min(440px,95%)">
+      <div class="win__bar">
+        <span class="win__lights">
+          <button class="win__btn win__btn--close" type="button" data-act="close"></button>
+          <button class="win__btn win__btn--min" type="button" data-act="min"></button>
+          <button class="win__btn win__btn--max" type="button" data-act="max"></button>
+        </span>
+        <span class="win__title">Notes — Substack</span>
+      </div>
+      <div class="win__body">
+        {blog.map((b, i) => (
+          <div>
+            <button type="button" class:list={['notes__item', { 'is-active': i === 0 }]} data-note={b.id}>
+              <span class="notes__title">{b.data.title}</span>
+              <span class="notes__meta mono">{b.data.description.slice(0, 80)}…</span>
+            </button>
+            <article class="notes__doc" data-note={b.id} hidden={i !== 0}>
+              <p class="faint">{b.data.description}</p>
+              <a class="btn btn--primary" href={`/substack/${b.id}`}>Read essay →</a>
+            </article>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="win win--mail" data-app="mail" hidden style="left:120px;top:72px;width:min(400px,95%)">
+      <div class="win__bar">
+        <span class="win__lights">
+          <button class="win__btn win__btn--close" type="button" data-act="close"></button>
+          <button class="win__btn win__btn--min" type="button" data-act="min"></button>
+          <button class="win__btn win__btn--max" type="button" data-act="max"></button>
+        </span>
+        <span class="win__title">New Message</span>
+      </div>
+      <div class="win__body">
+        <form class="mail" action={`mailto:${profile.email}`} method="get">
+          <label class="mail__field"><span>To:</span><input type="text" value={profile.email} readonly /></label>
+          <label class="mail__field"><span>Subject:</span><input name="subject" type="text" value="Hello Hritik" /></label>
+          <textarea name="body" class="mail__body" placeholder="Write your message…"></textarea>
+          <button class="btn btn--primary" type="submit">Send via Mail ↗</button>
+        </form>
+      </div>
+    </div>
+
+    <nav class="dock" aria-label="Dock">
+      <button class="dock__item is-running" type="button" data-launch="terminal" aria-label="Terminal">⌘<span class="dock__dot"></span></button>
+      <button class="dock__item" type="button" data-launch="finder" aria-label="Projects">📁<span class="dock__dot"></span></button>
+      <button class="dock__item" type="button" data-launch="notes" aria-label="Notes">📝<span class="dock__dot"></span></button>
+      <button class="dock__item" type="button" data-launch="mail" aria-label="Mail">✉️<span class="dock__dot"></span></button>
+      <a class="dock__item" href={profile.links.github} target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+      <a class="dock__item" href={profile.links.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a class="dock__item" href={profile.links.instagram} target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+    </nav>
+  </div>
+</section>
+<script src="../scripts/desktop.ts"></script>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProfile, getSubstackPosts, formatPostDate } from '../../lib/site';
+
+const profile = await getProfile();
+const posts = getSubstackPosts();
+---
+<BaseLayout
+  title="Substack"
+  description="Essays from prometheus — Hritik Rai's Substack on attention, craft, and living deliberately."
+  current="substack"
+>
+  <div class="wrap substack">
+    <p class="eyebrow">prometheus · Substack</p>
+    <h1 class="section-title" data-cipher>Essays.</h1>
+    <p class="section-lead">
+      Attention, craft, and living deliberately. Read them here, or subscribe on
+      <a href={profile.links.substack} target="_blank" rel="noopener">Substack</a> to get new ones by email.
+    </p>
+    <div class="substack__grid">
+      {posts.map((p) => (
+        <a class="substack__card" href={`/substack/${p.slug}`}>
+          {p.cover && (
+            <span class="substack__cover">
+              <img src={p.cover} alt="" loading="lazy" decoding="async" />
+            </span>
+          )}
+          <span class="substack__meta mono">
+            {formatPostDate(p.pubDate, 'short')} · {p.readingMinutes} min read
+          </span>
+          <span class="substack__title">{p.title}</span>
+          <span class="substack__desc">{p.description}</span>
+        </a>
+      ))}
+    </div>
+    <p class="substack__cta">
+      <a class="btn btn--primary" href={`${profile.links.substack}subscribe`} target="_blank" rel="noopener">Subscribe on Substack ↗</a>
+    </p>
+  </div>
+</BaseLayout>

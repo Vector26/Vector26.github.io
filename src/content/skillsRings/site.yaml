@@ -1,0 +1,39 @@
+rings:
+  - id: scale
+    name: Scale & data
+    glyphs: CASSANDRA · ELASTIC · TEMPORAL · ARGO · GREMLIN ·
+    skills:
+      - Cassandra
+      - Elasticsearch
+      - Temporal
+      - Argo Workflows
+      - Kafka
+      - ClickHouse
+  - id: ai
+    name: AI & automation
+    glyphs: RAG · AGENTS · N8N · QDRANT · SCIP · LLM ·
+    skills:
+      - Agent workflows
+      - Vector search
+      - Code intelligence
+      - n8n
+      - Prompt tooling
+  - id: security
+    name: Security & platform
+    glyphs: SAST · DEPS · TLS · CI · JAVA21 · JAKARTA ·
+    skills:
+      - Dependency remediation
+      - Jakarta EE migrations
+      - Valkey TLS
+      - CI base images
+      - OAuth/JWT
+  - id: web
+    name: Web & backend
+    glyphs: SPRING · NEST · DJANGO · GRAPHQL · DOCKER · K8S ·
+    skills:
+      - Spring Boot
+      - NestJS
+      - Node/Express
+      - Django
+      - Kubernetes
+      - AWS

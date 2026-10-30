@@ -1,0 +1,67 @@
+name: Build and publish site
+
+# Substack has no publish webhook, so the feed is re-synced on a schedule.
+on:
+  schedule:
+    - cron: '17 * * * *'
+  push:
+    branches: [source]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          ref: source
+          path: src
+
+      - name: Checkout published site
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          path: out
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: src/package-lock.json
+
+      - name: Install and build (syncs Substack)
+        working-directory: src
+        run: npm ci && npm run build
+
+      - name: Publish if changed
+        id: publish
+        working-directory: out
+        run: |
+          rsync -a --delete --exclude '.git' --exclude '.github' ../src/dist/ ./
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Publish site (${GITHUB_EVENT_NAME})"
+          git push origin HEAD:master
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Request Pages build
+        if: steps.publish.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" || echo "Pages build request failed; the push should still trigger a build."

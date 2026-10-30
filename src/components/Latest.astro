@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  blog: CollectionEntry<'blog'>[];
+  experience: CollectionEntry<'experience'>[];
+}
+const { blog, experience } = Astro.props;
+const founda = experience.find((e) => e.id.includes('founda'));
+---
+<section class="latest" aria-labelledby="latest-title">
+  <div class="wrap">
+    <p class="eyebrow">Latest</p>
+    <h2 class="section-title" id="latest-title" data-cipher>Field notes.</h2>
+    <div class="latest__links" style="margin-bottom:1.5rem">
+      <a class="btn" href="/substack">All essays →</a>
+      <a class="btn" href="/about">Experience →</a>
+    </div>
+    <div class="log">
+      {blog.slice(0, 3).map((b) => (
+        <a class="log__item" href={`/substack/${b.id}`}>
+          <span class="log__date">{b.data.pubDate.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}</span>
+          <span>
+            <span class="faint mono">Essay · Substack</span>
+            <span class="log__title" data-cipher-hover>{b.data.title}</span>
+            <p class="log__desc">{b.data.description}</p>
+          </span>
+          <span aria-hidden="true">→</span>
+        </a>
+      ))}
+      {founda && (
+        <a class="log__item" href="/about#experience">
+          <span class="log__date">2026</span>
+          <span>
+            <span class="faint mono">Work · Platform & AI</span>
+            <span class="log__title">{founda.data.company}</span>
+            <p class="log__desc">{founda.data.highlights[0]}</p>
+          </span>
+          <span aria-hidden="true">→</span>
+        </a>
+      )}
+    </div>
+  </div>
+</section>

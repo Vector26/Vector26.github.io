@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjectsSorted } from '../../lib/site';
+
+const projects = await getProjectsSorted();
+---
+<BaseLayout title="Projects" current="projects">
+  <div class="wrap" style="padding: 3rem 0 4rem">
+    <p class="eyebrow">Projects</p>
+    <h1 class="section-title">Selected work</h1>
+    <p class="section-lead">
+      Public repositories on <a href="https://github.com/Vector26?tab=repositories" target="_blank" rel="noopener">GitHub</a>, newest first.
+    </p>
+    <div class="log">
+      {projects.map((p) => (
+        <a
+          class="log__item"
+          href={p.data.repo ?? p.data.url ?? '#'}
+          target={p.data.url || p.data.repo ? '_blank' : undefined}
+          rel="noopener"
+        >
+          <span class="log__date">{p.data.year ?? ''}</span>
+          <span>
+            <span class="log__title">{p.data.title}{p.data.stars ? <span class="faint mono"> · ★ {p.data.stars}</span> : null}</span>
+            <p class="log__desc">{p.data.description}</p>
+            <span class="chip">{p.data.tags.join(' · ')}</span>
+          </span>
+          <span>→</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

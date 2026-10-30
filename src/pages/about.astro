@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getProfile, getExperienceSorted, getAchievements, formatMonthRange } from '../lib/site';
+
+const profile = await getProfile();
+const experience = await getExperienceSorted();
+const achievements = await getAchievements();
+---
+<BaseLayout title="About" description={profile.about} current="about">
+  <div class="wrap" style="padding: 3rem 0 4rem">
+    <p class="eyebrow">About</p>
+    <h1 class="section-title">{profile.name}</h1>
+    <p class="section-lead">{profile.about}</p>
+    <p><a class="btn btn--primary" href="/resume.pdf">Download resume (PDF)</a></p>
+
+    <h2 id="experience" class="section-title" style="font-size:1.5rem;margin-top:2.5rem">Experience</h2>
+    <div class="timeline">
+      {experience.map((job) => (
+        <article class="timeline__item">
+          <p class="timeline__when">
+            {formatMonthRange(job.data.start, job.data.end, job.data.current)}
+          </p>
+          <h3>{job.data.title} · {job.data.company}</h3>
+          {job.data.location && <p class="faint">{job.data.location}</p>}
+          <ul class="timeline__highlights">
+            {job.data.highlights.map((h) => (
+              <li>{h}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <h2 class="section-title" style="font-size:1.5rem;margin-top:2.5rem">Education</h2>
+    <p>
+      <strong>{achievements.education.degree}</strong><br />
+      {achievements.education.school} · {achievements.education.location}<br />
+      <span class="faint">Graduated {achievements.education.graduated}{achievements.education.gpa ? ` · CGPA ${achievements.education.gpa}` : ''}</span>
+    </p>
+
+    <h2 class="section-title" style="font-size:1.5rem;margin-top:2.5rem">Achievements</h2>
+    <ul>
+      {achievements.awards.map((a) => (
+        <li><strong>{a.title}</strong> <span class="faint">({a.date})</span></li>
+      ))}
+    </ul>
+
+    <h2 class="section-title" style="font-size:1.5rem;margin-top:2.5rem">Leadership</h2>
+    <ul>
+      {achievements.leadership.map((l) => (
+        <li><strong>{l.role}</strong> — {l.org}. {l.detail}</li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>

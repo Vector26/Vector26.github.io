@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Boot from '../components/Boot.astro';
+import Vault from '../components/Vault.astro';
+import Desktop from '../components/Desktop.astro';
+import SkillRings from '../components/SkillRings.astro';
+import Latest from '../components/Latest.astro';
+import {
+  getProfile,
+  getSkillsRings,
+  getProjectsSorted,
+  getBlogSorted,
+  getExperienceSorted,
+} from '../lib/site';
+
+const profile = await getProfile();
+const skillsRings = await getSkillsRings();
+const projects = await getProjectsSorted();
+const blog = await getBlogSorted();
+const experience = await getExperienceSorted();
+---
+<BaseLayout current="home">
+  <Boot />
+  <Vault profile={profile} />
+  <Desktop profile={profile} projects={projects} blog={blog} />
+  <SkillRings rings={skillsRings} />
+  <Latest blog={blog} experience={experience} />
+</BaseLayout>

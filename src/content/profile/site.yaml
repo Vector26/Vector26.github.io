@@ -1,0 +1,24 @@
+name: Hritik Rai
+given: Hritik
+family: Rai
+tagline: Software engineer — distributed systems, AI agents, and platform security
+about: >-
+  I build scalable backends and automation that ships: metadata platforms at
+  multi-tenant scale, agent workflows for sales and engineering, and the
+  migrations and security fixes that keep production boring. I write on Substack
+  as prometheus when I'm not in the terminal.
+location: India
+email: hritik.26.rai@gmail.com
+links:
+  github: https://github.com/Vector26
+  linkedin: https://www.linkedin.com/in/hritik-rai/
+  substack: https://vector2604.substack.com/
+  instagram: https://www.instagram.com/thehritikrai/
+  website: https://vector26.github.io/
+chips:
+  - label: Senior Software Engineer @ Founda
+  - label: Previously SDE 2 @ Atlan
+  - label: India
+  - label: Substack · prometheus
+    hot: true
+    title: Essays on attention, craft, and living deliberately

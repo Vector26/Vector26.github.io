@@ -1,0 +1,20 @@
+awards:
+  - title: 5th Place — JetBrains & iNeuron Kotlin Hackathon
+    date: June 2022
+  - title: Winner — Flipr FullStack Hackathon XII
+    date: February 2022
+  - title: Best Hardware Hack — MLH BonVoyageHacks
+    date: July 2021
+leadership:
+  - role: Webmaster
+    org: ACM JUIT
+    detail: Workshops and hackathons for 200+ students; chapter infrastructure
+  - role: CyberSecurity Team Lead
+    org: ACM JUIT
+    detail: Learning paths, security training, and CTF competitions
+education:
+  school: Jaypee University of Information Technology
+  degree: B.Tech in Computer Science
+  location: Solan, Himachal Pradesh
+  graduated: June 2023
+  gpa: "8.14/10"

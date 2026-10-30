@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+import TopNav from '../components/TopNav.astro';
+import Footer from '../components/Footer.astro';
+import { getProfile } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: 'home' | 'about' | 'substack' | 'projects';
+  canonical?: string;
+  image?: string;
+}
+const { title, description, current = 'home', canonical, image } = Astro.props;
+const profile = await getProfile();
+
+const pageTitle = title ? `${title} — ${profile.name}` : `${profile.name} — ${profile.tagline}`;
+const pageDesc = description ?? profile.about;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <link rel="canonical" href={canonical ?? new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="theme-color" content="#08090a" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    {image && <meta property="og:image" content={image} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="page-sky" aria-hidden="true"></div>
+    <TopNav current={current} profile={profile} />
+    <main>
+      <slot />
+    </main>
+    <Footer profile={profile} />
+    <script src="../scripts/cipher.ts"></script>
+  </body>
+</html>

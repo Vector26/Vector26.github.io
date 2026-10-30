@@ -1,0 +1,27 @@
+{
+  "name": "site",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm run sync:substack && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "sync:substack": "node scripts/sync-substack.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@types/three": "^0.186.0",
+    "astro": "^7.4.4",
+    "js-yaml": "^5.5.0",
+    "three": "^0.187.0",
+    "ultrahtml": "1.7.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9"
+  }
+}

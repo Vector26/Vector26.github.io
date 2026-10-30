@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  current?: 'home' | 'about' | 'substack' | 'projects';
+  profile: CollectionEntry<'profile'>['data'];
+}
+const { current = 'home', profile } = Astro.props;
+---
+<header class="topnav">
+  <a class="topnav__brand" href="/" aria-label="Home">
+    <span class="mono" aria-hidden="true">··−·</span>
+    <b>{profile.name}</b>
+  </a>
+  <nav class="topnav__pill" aria-label="Primary">
+    <a href="/" class:list={['topnav__item', { 'is-active': current === 'home' }]}>Home</a>
+    <a href="/about" class:list={['topnav__item', { 'is-active': current === 'about' }]}>About</a>
+    <a href="/substack" class:list={['topnav__item', { 'is-active': current === 'substack' }]}>Substack</a>
+    <a href="/projects" class:list={['topnav__item', { 'is-active': current === 'projects' }]}>Projects</a>
+  </nav>
+  <a class="btn topnav__cta" href={`mailto:${profile.email}`}>Get in touch</a>
+</header>
+<script>
+  const onScroll = () => document.documentElement.classList.toggle('is-scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>

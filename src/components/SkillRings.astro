@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  rings: CollectionEntry<'skillsRings'>['data'];
+}
+const { rings } = Astro.props;
+const flat = rings.rings.flatMap((r) => r.skills);
+---
+<section class="rings" id="skills" aria-labelledby="rings-title">
+  <div class="wrap">
+    <p class="eyebrow">Skills</p>
+    <h2 class="section-title" id="rings-title"><span data-cipher>Engineering rings.</span></h2>
+    <p class="section-lead">Grouped by what I ship most often — select a chip to highlight on the canvas.</p>
+    <ol class="rings__legend">
+      {rings.rings.map((r, i) => (
+        <li class="rings__label">
+          <span class="rings__ringno mono">RING 0{i + 1}</span>
+          <span class="rings__ringname">{r.name}</span>
+          <span class="rings__ringcodes mono">{r.skills.join(' · ')}</span>
+        </li>
+      ))}
+    </ol>
+    <div class="rings__canvas-wrap">
+      <canvas class="rings__canvas" aria-hidden="true"></canvas>
+    </div>
+    <div class="rings__badges">
+      {flat.map((s, i) => (
+        <button type="button" class:list={['rings__badge', 'mono', { 'is-active': i === 0 }]}>{s}</button>
+      ))}
+    </div>
+    <script type="application/json" id="rings-data" set:html={JSON.stringify(rings.rings)} />
+  </div>
+</section>
+<script src="../scripts/skill-rings.ts"></script>

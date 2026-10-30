@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProfile, getSubstackPosts, formatPostDate, type SubstackPost } from '../../lib/site';
+
+export function getStaticPaths() {
+  const posts = getSubstackPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.slug },
+    props: { post, newer: posts[i - 1] ?? null, older: posts[i + 1] ?? null },
+  }));
+}
+
+interface Props {
+  post: SubstackPost;
+  newer: SubstackPost | null;
+  older: SubstackPost | null;
+}
+const { post, newer, older } = Astro.props;
+const profile = await getProfile();
+---
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  current="substack"
+  canonical={post.url}
+  image={post.cover ?? undefined}
+>
+  <article class="wrap essay">
+    <a class="essay__back mono" href="/substack">← All essays</a>
+    <header class="essay__head">
+      <p class="eyebrow">prometheus · {formatPostDate(post.pubDate)} · {post.readingMinutes} min read</p>
+      <h1 class="essay__title">{post.title}</h1>
+      {post.description && <p class="essay__dek">{post.description}</p>}
+    </header>
+    <div class="essay__body" set:html={post.html} />
+    <footer class="essay__foot">
+      <p class="faint">Originally published on Substack.</p>
+      <div class="essay__actions">
+        <a class="btn btn--primary" href={post.url} target="_blank" rel="noopener">Comment on Substack ↗</a>
+        <a class="btn" href={`${profile.links.substack}subscribe`} target="_blank" rel="noopener">Subscribe ↗</a>
+      </div>
+      <nav class="essay__pager" aria-label="More essays">
+        {newer ? <a href={`/substack/${newer.slug}`}><span class="mono faint">← Newer</span>{newer.title}</a> : <span />}
+        {older && <a class="essay__older" href={`/substack/${older.slug}`}><span class="mono faint">Older →</span>{older.title}</a>}
+      </nav>
+    </footer>
+  </article>
+</BaseLayout>
