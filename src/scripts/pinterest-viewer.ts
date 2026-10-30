@@ -88,5 +88,43 @@ function initVideos(): void {
   videos.forEach((v) => io.observe(v));
 }
 
+const ROW = 4;
+
+function initMasonry(): void {
+  const grid = document.querySelector<HTMLElement>('.pin-grid');
+  if (!grid) return;
+  const items = [...grid.querySelectorAll<HTMLElement>('.pin')].map((el) => {
+    const img = el.querySelector('img');
+    return { el, ratio: Number(img?.getAttribute('height')) / Number(img?.getAttribute('width')) || 1 };
+  });
+
+  const layout = () => {
+    const narrow = window.matchMedia('(max-width: 640px)').matches;
+    const gap = narrow ? 6 : 12;
+    const width = grid.clientWidth;
+    const cols = narrow ? 2 : Math.max(2, Math.min(4, Math.floor((width + gap) / (260 + gap))));
+    const colWidth = (width - gap * (cols - 1)) / cols;
+    const heights = new Array<number>(cols).fill(0);
+    grid.style.setProperty('--cols', String(cols));
+    grid.style.setProperty('--gap', `${gap}px`);
+    for (const { el, ratio } of items) {
+      const col = heights.indexOf(Math.min(...heights));
+      const span = Math.ceil((colWidth * ratio + gap) / ROW);
+      el.style.gridColumn = String(col + 1);
+      el.style.gridRow = `${heights[col] + 1} / span ${span}`;
+      heights[col] += span;
+    }
+    grid.classList.add('is-masonry');
+  };
+
+  layout();
+  let raf = 0;
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(layout);
+  });
+}
+
+initMasonry();
 initViewer();
 initVideos();

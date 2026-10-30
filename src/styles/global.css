@@ -1950,6 +1950,18 @@ a.finder__row:hover {
   margin-bottom: 12px;
 }
 
+.pin-grid.is-masonry {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-auto-rows: 4px;
+  column-gap: var(--gap);
+  columns: auto;
+}
+
+.pin-grid.is-masonry .pin {
+  margin: 0;
+}
+
 .pin__btn {
   position: relative;
   display: block;
