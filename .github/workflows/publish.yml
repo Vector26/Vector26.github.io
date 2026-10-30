@@ -70,15 +70,3 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" || echo "Pages build request failed; the push should still trigger a build."
-
-      - name: Save synced Pinterest pins to source
-        working-directory: src
-        run: |
-          git add src/data/pinterest.json src/assets/pinterest
-          if git diff --cached --quiet; then
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Sync Pinterest pins"
-          git push origin HEAD:source

@@ -4,7 +4,7 @@ import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import pinterest from '../data/pinterest.json';
 
-type RawPin = { id: string; title: string; alt: string; date: string; image: string; video?: string; w?: number; h?: number };
+type RawPin = { id: string; title: string; alt: string; image: string; video?: string; w?: number; h?: number };
 
 const files = import.meta.glob<{ default: ImageMetadata }>('../assets/pinterest/*.jpg', { eager: true });
 const asset = (name: string): ImageMetadata => {
@@ -26,7 +26,6 @@ const pins = await Promise.all(
     return {
       id: p.id,
       title: p.title,
-      date: p.date,
       alt: p.alt || p.title,
       w: src.width,
       h: src.height,
@@ -41,7 +40,7 @@ const featured = pins.find((p) => !p.video && p.w > p.h * 1.2) ?? pins[0];
 const hero = await getImage({ src: asset(`${featured.id}.jpg`), widths: [1200, 1800, 2400].filter((w) => w <= featured.w), sizes: '100vw', format: 'webp', quality: 82 });
 const avatar = pinterest.profile.avatar ? await getImage({ src: asset(pinterest.profile.avatar), width: 160, format: 'webp' }) : null;
 const { profile } = pinterest;
-const viewerData = pins.map(({ title, date, full, video, w, h }) => ({ title, date, full, video, w, h }));
+const viewerData = pins.map(({ title, full, video, w, h }) => ({ title, full, video, w, h }));
 ---
 <BaseLayout
   title="Pinterest"

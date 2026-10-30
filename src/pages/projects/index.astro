@@ -23,7 +23,7 @@ const projects = await getProjectsSorted();
           <span>
             <span class="log__title">{p.data.title}{p.data.stars ? <span class="faint mono"> · ★ {p.data.stars}</span> : null}</span>
             <p class="log__desc">{p.data.description}</p>
-            <span class="log__tags">{p.data.tags.map((t) => <span class="chip">{t}</span>)}</span>
+            <span class="chip">{p.data.tags.join(' · ')}</span>
           </span>
           <span>→</span>
         </a>

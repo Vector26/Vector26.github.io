@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://hritikrai.com',
+  site: 'https://vector26.github.io',
   output: 'static',
   compressHTML: true,
   redirects: {
