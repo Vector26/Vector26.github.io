@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  current?: 'home' | 'about' | 'substack' | 'projects';
+  current?: 'home' | 'about' | 'substack' | 'projects' | 'instagram';
   profile: CollectionEntry<'profile'>['data'];
 }
 const { current = 'home', profile } = Astro.props;
@@ -17,6 +17,7 @@ const { current = 'home', profile } = Astro.props;
     <a href="/about" class:list={['topnav__item', { 'is-active': current === 'about' }]}>About</a>
     <a href="/substack" class:list={['topnav__item', { 'is-active': current === 'substack' }]}>Substack</a>
     <a href="/projects" class:list={['topnav__item', { 'is-active': current === 'projects' }]}>Projects</a>
+    <a href="/instagram" class:list={['topnav__item', { 'is-active': current === 'instagram' }]}>Instagram</a>
   </nav>
   <a class="btn topnav__cta" href={`mailto:${profile.email}`}>Get in touch</a>
 </header>
