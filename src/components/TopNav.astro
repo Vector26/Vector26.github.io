@@ -26,4 +26,10 @@ const { current = 'home', profile } = Astro.props;
   const onScroll = () => document.documentElement.classList.toggle('is-scrolled', window.scrollY > 8);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  const pill = document.querySelector<HTMLElement>('.topnav__pill');
+  const active = pill?.querySelector<HTMLElement>('.is-active');
+  if (pill && active && pill.scrollWidth > pill.clientWidth) {
+    pill.scrollLeft = active.offsetLeft - (pill.clientWidth - active.offsetWidth) / 2;
+  }
 </script>

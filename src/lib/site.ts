@@ -26,6 +26,16 @@ export function formatPostDate(iso: string | null, style: 'long' | 'short' = 'lo
     : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
+const METRIC = /(~?\d[\d.,]*\s?(?:×|%|\+|M\+|K)?(?:\s?(?:hours?|minutes?|ms|services|repositories))?|sub-\d+ms|zero (?:downtime|data loss))/g;
+
+/** Split text into plain and metric segments so numbers can be emphasised without set:html. */
+export function emphasizeMetrics(text: string): { text: string; metric: boolean }[] {
+  return text
+    .split(METRIC)
+    .filter(Boolean)
+    .map((part) => ({ text: part, metric: new RegExp(`^${METRIC.source}$`).test(part) }));
+}
+
 export async function getProfile() {
   const entry = await getEntry('profile', 'site');
   if (!entry) throw new Error('profile/site.yaml missing');

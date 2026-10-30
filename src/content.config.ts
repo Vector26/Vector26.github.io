@@ -11,6 +11,7 @@ const experience = defineCollection({
     end: z.string().optional(),
     current: z.boolean().optional(),
     order: z.number(),
+    headline: z.object({ value: z.string(), label: z.string() }).optional(),
     highlights: z.array(z.string()),
   }),
 });

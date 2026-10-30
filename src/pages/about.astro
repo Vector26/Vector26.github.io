@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getProfile, getExperienceSorted, getAchievements, formatMonthRange } from '../lib/site';
+import { getProfile, getExperienceSorted, getAchievements, formatMonthRange, emphasizeMetrics } from '../lib/site';
 
 const profile = await getProfile();
 const experience = await getExperienceSorted();
@@ -14,22 +14,35 @@ const achievements = await getAchievements();
     <p><a class="btn btn--primary" href="/resume.pdf">Download resume (PDF)</a></p>
 
     <h2 id="experience" class="section-title" style="font-size:1.5rem;margin-top:2.5rem">Experience</h2>
-    <div class="timeline">
+    <ol class="xp">
       {experience.map((job) => (
-        <article class="timeline__item">
-          <p class="timeline__when">
-            {formatMonthRange(job.data.start, job.data.end, job.data.current)}
-          </p>
-          <h3>{job.data.title} · {job.data.company}</h3>
-          {job.data.location && <p class="faint">{job.data.location}</p>}
-          <ul class="timeline__highlights">
-            {job.data.highlights.map((h) => (
-              <li>{h}</li>
-            ))}
-          </ul>
-        </article>
+        <li class:list={['xp__item', { 'is-current': job.data.current }]}>
+          <article class="xp__card">
+            <header class="xp__head">
+              <div class="xp__who">
+                <p class="xp__when mono">
+                  {formatMonthRange(job.data.start, job.data.end, job.data.current)}
+                  {job.data.current && <span class="xp__now">Now</span>}
+                </p>
+                <h3 class="xp__company">{job.data.company}</h3>
+                <p class="xp__role">{job.data.title}{job.data.location && <span class="faint"> · {job.data.location}</span>}</p>
+              </div>
+              {job.data.headline && (
+                <p class="xp__metric">
+                  <b>{job.data.headline.value}</b>
+                  <span>{job.data.headline.label}</span>
+                </p>
+              )}
+            </header>
+            <ul class="xp__points">
+              {job.data.highlights.map((h) => (
+                <li>{emphasizeMetrics(h).map((s) => (s.metric ? <strong>{s.text}</strong> : s.text))}</li>
+              ))}
+            </ul>
+          </article>
+        </li>
       ))}
-    </div>
+    </ol>
 
     <h2 class="section-title" style="font-size:1.5rem;margin-top:2.5rem">Education</h2>
     <p>

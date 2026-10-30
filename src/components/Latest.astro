@@ -21,7 +21,7 @@ const founda = experience.find((e) => e.id.includes('founda'));
         <a class="log__item" href={`/substack/${b.id}`}>
           <span class="log__date">{b.data.pubDate.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}</span>
           <span>
-            <span class="faint mono">Essay · Substack</span>
+            <span class="log__kind mono">Essay · Substack</span>
             <span class="log__title" data-cipher-hover>{b.data.title}</span>
             <p class="log__desc">{b.data.description}</p>
           </span>
@@ -30,9 +30,9 @@ const founda = experience.find((e) => e.id.includes('founda'));
       ))}
       {founda && (
         <a class="log__item" href="/about#experience">
-          <span class="log__date">2026</span>
+          <span class="log__date">{founda.data.start.slice(0, 4)}</span>
           <span>
-            <span class="faint mono">Work · Platform & AI</span>
+            <span class="log__kind mono">Work · Platform & AI</span>
             <span class="log__title">{founda.data.company}</span>
             <p class="log__desc">{founda.data.highlights[0]}</p>
           </span>
