@@ -7,7 +7,7 @@ import { getProfile } from '../lib/site';
 interface Props {
   title?: string;
   description?: string;
-  current?: 'home' | 'about' | 'substack' | 'projects' | 'instagram' | 'pinterest';
+  current?: 'home' | 'about' | 'substack' | 'projects' | 'instagram' | 'pinterest' | 'none';
   canonical?: string;
   image?: string;
 }
@@ -33,6 +33,7 @@ const pageDesc = description ?? profile.about;
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
     {image && <meta property="og:image" content={image} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <slot name="head" />
   </head>
   <body>
     <div class="page-sky" aria-hidden="true"></div>

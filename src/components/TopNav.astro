@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  current?: 'home' | 'about' | 'substack' | 'projects' | 'instagram' | 'pinterest';
+  current?: 'home' | 'about' | 'substack' | 'projects' | 'instagram' | 'pinterest' | 'none';
   profile: CollectionEntry<'profile'>['data'];
 }
 const { current = 'home', profile } = Astro.props;
