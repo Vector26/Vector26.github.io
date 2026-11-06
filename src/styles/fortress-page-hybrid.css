@@ -1,0 +1,32 @@
+/* Blend Fortress snapshot tokens with the portfolio dark shell (loaded only on /fortress) */
+:where(.fortress-page) {
+  --pg-bg: #08090a;
+  --pg-elev: #0f1114;
+  --pg-text: #e8eaed;
+  --pg-muted: #9aa0a6;
+  --pg-accent: #6ee7ff;
+  --pg-border: rgba(255, 255, 255, 0.1);
+
+  --bg: color-mix(in oklch, var(--pg-bg) 72%, #15181b);
+  --surface: color-mix(in oklch, var(--pg-elev) 68%, #1b1614);
+  --ink: color-mix(in oklch, var(--pg-text) 80%, #ece9e1);
+  --muted: color-mix(in oklch, var(--pg-muted) 65%, #a3a7ad);
+  --line: color-mix(in oklch, var(--pg-border) 50%, rgba(255, 138, 92, 0.35));
+  --accent: color-mix(in oklch, var(--pg-accent) 38%, #ff8a5c);
+  --ok: color-mix(in oklch, #5fd39a 70%, var(--pg-accent));
+  --warn: #ffb454;
+  --off: color-mix(in oklch, var(--pg-muted) 85%, #6b6f76);
+  --onaccent: #0e1012;
+}
+
+/* Terminal mock: pull toward portfolio cyan + warm edge */
+:where(.fortress-page) .term {
+  background: color-mix(in oklch, var(--pg-elev) 75%, #111315);
+  border-color: color-mix(in oklch, var(--pg-border) 60%, #2a2e33);
+  color: var(--ink);
+}
+
+:where(.fortress-page) .term-bar {
+  border-bottom-color: color-mix(in oklch, var(--pg-border) 55%, #2a2e33);
+  color: var(--muted);
+}

@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
-"""Scope docs/site/v2/style.css selectors under :where(.fortress-v2).
+"""Scope public/fortress/content/style.css selectors under :where(.fortress-page).
 
-Run:
-  /home/vector/fortress/portfolio/site/.venv-css/bin/python scripts/scope_fortress_css.py
+Run from repo root:
+  python3 scripts/scope_fortress_css.py
+(requires: pip install tinycss2)
 """
 from pathlib import Path
 
 import tinycss2
 
-ROOT = ":where(.fortress-v2)"
+ROOT = ":where(.fortress-page)"
 HERE = Path(__file__).resolve().parent
-INPUT = (HERE / "../../../docs/site/v2/style.css").resolve()
-OUTPUT = HERE.parent / "src/styles/fortress-v2-scoped.css"
+REPO = HERE.parent
+INPUT = REPO / "public/fortress/content/style.css"
+OUTPUT = REPO / "src/styles/fortress-page-scoped.css"
 
 
 def split_top_level_commas(s: str) -> list[str]:
@@ -120,8 +122,8 @@ def main() -> None:
     rules = tinycss2.parse_stylesheet(css, skip_comments=False, skip_whitespace=True)
     transformed = transform_rules(rules)
     header = (
-        "/* Auto-generated from docs/site/v2/style.css — do not edit by hand */\n"
-        "/* Regenerate: .venv-css/bin/python scripts/scope_fortress_css.py */\n"
+        "/* Auto-generated — do not edit by hand */\n"
+        "/* Regenerate: python3 scripts/scope_fortress_css.py */\n"
     )
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(header + tinycss2.serialize(transformed), encoding="utf-8")

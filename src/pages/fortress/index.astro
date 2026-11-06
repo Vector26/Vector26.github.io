@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/fortress-page-scoped.css';
+import '../../styles/fortress-page-hybrid.css';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
+const indexPath = path.join(process.cwd(), 'public/fortress/content/index.html');
+const raw = readFileSync(indexPath, 'utf8');
+let bodyInner = (raw.match(/<body>([\s\S]*)<\/body>/)?.[1] ?? '')
+  .replace(/<header[\s\S]*?<\/header>\s*/i, '')
+  .replace(/<footer[\s\S]*?<\/footer>\s*/i, '');
+bodyInner = bodyInner.replace(/^\s*<main[^>]*>/i, '').replace(/<\/main>\s*$/i, '');
+---
+<BaseLayout
+  title="Fortress"
+  description="Self-hosted AI and automation stack — public-safe snapshot (no hosts, paths, or credentials)."
+  current="fortress"
+>
+  <div class="fortress-page" set:html={bodyInner} />
+</BaseLayout>
