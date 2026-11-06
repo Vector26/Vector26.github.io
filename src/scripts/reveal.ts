@@ -13,6 +13,11 @@ const TARGETS = [
   '.substack__card',
   '.pin',
   '.ig__grid > li',
+  '.fortress-page .hero > .eyebrow',
+  '.fortress-page .hero-grid > *',
+  '.fortress-page .stats > li',
+  '.fortress-page section.band > .wrap',
+  '.fortress-page section.sect',
 ].join(',');
 
 function initReveal(): void {
