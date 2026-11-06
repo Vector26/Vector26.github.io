@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fortress — homelab AI stack</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <span class="brand"><i></i>FORTRESS</span>
+    <nav>
+      <a href="#architecture">Architecture</a>
+      <a href="#model">Model</a>
+      <a href="#agents">Agents</a>
+      <a href="#dume">DUM-E</a>
+      <a href="#healing">Self-healing</a>
+      <a href="#services">Services</a>
+      <a href="#products">Products</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero wrap">
+  <p class="eyebrow" data-cipher>Architecture overview &middot; self-hosted AI &amp; automation</p>
+  <div class="hero-grid">
+    <div>
+      <h1><span data-cipher>The</span><br /><span data-cipher>Fortress</span></h1>
+      <p class="lead">A <strong>self-hosted</strong> AI and automation stack on a single machine: <strong>one GPU, one shared brain, 40+ specialist agents</strong>, plus health checks and a maintenance agent that only proposes changes — you approve them.</p>
+      <p class="chips"><span>Linux workstation</span><span>Consumer GPU (~16 GB)</span><span>Docker</span><span>Private network access</span></p>
+    </div>
+    <div class="term" role="img" aria-label="Example health check summary">
+      <div class="term-bar"><b></b><b></b><b></b><span>fortress heal --check (example)</span></div>
+      <pre><span class="ok">OK  </span> brain / queue / gateway
+<span class="ok">OK  </span> agent platform checks
+<span class="ok">OK  </span> duty + sandbox audit
+<span class="dim">All major subsystems responding</span></pre>
+    </div>
+  </div>
+
+  <ul class="stats">
+    <li><b>40+</b> containers and services orchestrated as stacks</li>
+    <li><b>200k+</b> token-class context window on a local open-weights MoE</li>
+    <li><b>14+</b> registered agents with bounded roles</li>
+    <li><b>Observability</b>metrics, logs, and custom health jobs</li>
+    <li><b>100k+</b>lines of application code across projects</li>
+  </ul>
+</section>
+
+<section id="architecture" class="band">
+  <div class="wrap">
+    <p class="eyebrow">01 &mdash; Architecture</p>
+    <h2>One brain, 14+ roles.</h2>
+    <p class="sub">Clients talk to a small HTTP gateway. Requests go through a priority queue so only one heavy model sits on the GPU at a time — no duplicate copies and less VRAM fighting.</p>
+    <div class="two">
+      <div class="stack">
+        <p class="clients"><span>Apps</span><span>CLI</span><span>Automation</span><span>Alerts</span></p>
+        <div class="link"><i></i>Authenticated API</div>
+        <div class="box"><div class="box-h"><h3>Agent gateway</h3><code>internal</code></div><p>Job queue, audit trail, per-agent limits and risk classes — not a raw shell to the model.</p></div>
+        <div class="link"><i></i>Priority + fairness</div>
+        <div class="box"><div class="box-h"><h3>Model queue</h3><code>internal</code></div><p>OpenAI-compatible front door; batches and nightly work defer to interactive traffic.</p></div>
+        <div class="link"><i></i>Upstream</div>
+        <div class="box hl"><div class="box-h"><h3>Local inference</h3><code>llama.cpp-class</code></div><p>Open-weights MoE (100B+ parameter-class), quantized, 200k+ token-class context, one GPU.</p></div>
+      </div>
+      <aside class="side">
+        <div class="card">
+          <h4>Guards beside the brain</h4>
+          <p><b>VRAM policy</b><br>Sheds batch GPU work before user-facing inference when memory is tight.</p>
+          <p><b>Startup guard</b><br>Won’t stack conflicting GPU services without an explicit decision.</p>
+          <p><b>Alternate runtime</b><br>Optional second engine for smaller or cold-stored models.</p>
+        </div>
+        <div class="card">
+          <h4>Operational discipline</h4>
+          <ul class="proof">
+            <li>Exposure is minimized: internal endpoints and credentials stay off the public web.</li>
+            <li>Infrastructure layout and backups follow a reviewed runbook — not advertised here.</li>
+            <li>Health and incident detail live in the ops channel, not in marketing copy.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="model" class="wrap sect">
+  <p class="eyebrow">02 &mdash; The local model</p>
+  <h2>Big MoE, long context, bounded VRAM.</h2>
+  <p class="sub">Weights are quantized; KV cache is compressed; experts can be staged so the active path fits consumer hardware. Tuning stays environment-specific so the focus here stays on architecture.</p>
+  <div class="grid4">
+    <div class="card"><code class="acc">Quantized</code><h3>Weights</h3><p>4-bit–class GGUF-style serving; only a small expert subset active per token.</p></div>
+    <div class="card"><code class="acc">MoE</code><h3>Experts</h3><p>Router + experts; offload strategy keeps GPU headroom for context and bursts.</p></div>
+    <div class="card"><code class="acc">KV</code><h3>Cache</h3><p>Compressed key/value with flash-style attention where supported.</p></div>
+    <div class="card"><code class="acc">Fit</code><h3>Headroom</h3><p>Runtime self-limits to leave slack for photo ML, voice, or batch jobs.</p></div>
+  </div>
+</section>
+
+<section id="agents" class="band">
+  <div class="wrap">
+    <p class="eyebrow">03 &mdash; The agent platform</p>
+    <h2>Specialists, not one chatbot.</h2>
+    <p class="sub">A registry assigns duties, refusals, and hand-offs. The gateway enforces API shape; periodic audits check that agents stay within their contracts.</p>
+    <div class="grid3">
+      <article class="card agent"><div class="ah"><h3>DUM-E</h3><span>operations</span></div><p>Read-only diagnostics and change <em>proposals</em>; execution stays with the owner.</p><p class="ref"><b>Refuses</b> Ad-hoc shell, unsupervised mutations.</p></article>
+      <article class="card agent"><div class="ah"><h3>Detective</h3><span>intel</span></div><p>Open-web research with citations and memory — not finance or infra.</p><p class="ref"><b>Refuses</b> Trading advice, workflow edits.</p></article>
+      <article class="card agent"><div class="ah"><h3>Dexter</h3><span>finance</span></div><p>Deep finance research loop; separate from platform ops.</p><p class="ref"><b>Refuses</b> Trading instructions.</p></article>
+      <article class="card agent"><div class="ah"><h3>Finance Agent</h3><span>finance</span></div><p>Watchlist, snapshots, and gateway-facing tools — typed surface only.</p><p class="ref"><b>Refuses</b> Raw shell.</p></article>
+      <article class="card agent"><div class="ah"><h3>flowsmith</h3><span>automation</span></div><p>Builds and versions automation flows; activation is deliberate.</p><p class="ref"><b>Refuses</b> Unsafe execution primitives.</p></article>
+      <article class="card agent"><div class="ah"><h3>ODA</h3><span>design</span></div><p>Design artifacts and static previews served inside the lab.</p><p class="ref"><b>Refuses</b> Server administration.</p></article>
+      <article class="card agent"><div class="ah"><h3>Virtual Self</h3><span>personal</span></div><p>Memory and recall over a structured store — bounded scope.</p><p class="ref"><b>Refuses</b> General internet research.</p></article>
+    </div>
+    <div class="card also">
+      <h4>Also in the registry</h4>
+      <p class="chips"><span>Security research workspace</span><span>IDE / harness agents</span><span>Voice (optional)</span><span>Curator tools</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="dume" class="wrap sect">
+  <p class="eyebrow">04 &mdash; DUM-E</p>
+  <h2>Maintenance with a leash.</h2>
+  <p class="sub">A dedicated ops-style agent with a fixed tool set: inspect state, suggest actions, never silently mutate. Destructive or irreversible steps require explicit owner approval.</p>
+  <ol class="steps">
+    <li><i>01</i><h3>Diagnose</h3><p>Health, logs, GPU, services — read-only tooling.</p><code>dume doctor</code></li>
+    <li><i>02</i><h3>Propose</h3><p>Writes a pending change request, not a live patch.</p><code>propose_*</code></li>
+    <li><i>03</i><h3>Review</h3><p>Human reads the full proposal.</p><code>dume show</code></li>
+    <li><i>04</i><h3>Approve</h3><p>Owner executes after confirmation; deletes need a typed phrase.</p><code>dume approve</code></li>
+  </ol>
+</section>
+
+<section id="healing" class="band">
+  <div class="wrap">
+    <p class="eyebrow">05 &mdash; Self-healing</p>
+    <h2>Checks that exercise real behavior.</h2>
+    <p class="sub">Timers and cron run probes: not only “is the process up,” but can the queue serve a completion, are dependencies reachable, and do background jobs stay within policy.</p>
+    <div class="two even">
+      <div>
+        <h4 class="cap">VRAM policy (conceptual)</h4>
+        <div class="prio"><b>P0</b><div><h3>Interactive brain</h3><p>Last thing you tear down under pressure.</p></div></div>
+        <div class="prio"><b>P1</b><div><h3>Voice / latency-sensitive</h3><p>Graceful exit before hard kills when possible.</p></div></div>
+        <div class="prio"><b>P2</b><div><h3>Batch GPU</h3><p>Stopped or deferred first when the GPU is saturated.</p></div></div>
+      </div>
+      <div>
+        <h4 class="cap">Rhythm (categories only)</h4>
+        <table class="cad">
+          <tr><th>Frequent</th><td>Light agent-platform probe + auto-repair of safe conditions</td></tr>
+          <tr><th>Hourly</th><td>Broader health pass with alerting on real failures</td></tr>
+          <tr><th>Daily / weekly</th><td>Backups, retention, feed learning, image hygiene — as configured</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="wrap sect">
+  <p class="eyebrow">06 &mdash; Services</p>
+  <h2>Full private cloud footprint.</h2>
+  <p class="sub">Compose-managed stacks for automation, observability, photos, projects, object storage, voice experiments, and more — not everything runs at once; the control plane turns stacks on and off as one unit.</p>
+  <ul class="svc">
+    <li class="on"><b>Automation</b><i>typical</i><span>Workflow engine</span></li>
+    <li class="on"><b>Observability</b><i>typical</i><span>Metrics, logs, dashboards</span></li>
+    <li class="on"><b>Photos</b><i>typical</i><span>Self-hosted library + ML tagging options</span></li>
+    <li class="on"><b>Projects</b><i>typical</i><span>Issue / board app</span></li>
+    <li class="on"><b>Object storage</b><i>typical</i><span>S3-compatible vault for inbound sync</span></li>
+    <li class="on"><b>Personal products</b><i>varies</i><span>Feed backend, memory service, newsletters, games — custom code</span></li>
+  </ul>
+  <p class="muted small">Stack versions rotate with upgrades; this page stays about roles and patterns, not a CVE shopping list.</p>
+</section>
+
+<section id="products" class="band">
+  <div class="wrap">
+    <p class="eyebrow">07 &mdash; Built on top</p>
+    <h2>Original applications, not only charts.</h2>
+    <p class="sub">Several repos are product-sized: feed ranking with transparent scoring, a positive-news pipeline, gamified productivity (web + mobile), finance tooling with a thin client contract, and a 100k+ LOC investigative-agent codebase.</p>
+    <div class="notes">
+      <div class="card"><h3>Feed</h3><p>Miniflux-style API for a third-party reader; trust and diversity baked into ranking.</p></div>
+      <div class="card"><h3>News edition</h3><p>Hope-scored newsletter with human approval before send.</p></div>
+      <div class="card"><h3>Life planner</h3><p>Backend + web + Android; “quest” metaphor instead of guilt dashboards.</p></div>
+      <div class="card"><h3>Finance surface</h3><p>Gateway-disciplined chat and automation control from a phone app — contract-first, same patterns as the rest of the stack.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Security posture (high level)</p>
+    <h2 class="h-sm">Defense in depth — without a punch list for attackers.</h2>
+    <p class="sub">Private connectivity, authenticated APIs, least-privilege agents, encrypted off-site backup, and separation between “ops proposals” and “ops execution.” Policy and implementation specifics are handled in ops docs, not splashed on a landing page.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap foot">
+  <span>FORTRESS &middot; homelab AI &amp; automation</span>
+  <span>Questions welcome — reach out via the portfolio contact link.</span>
+</footer>
+
+</body>
+</html>
