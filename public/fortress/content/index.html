@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fortress — portfolio (public-safe)</title>
+<title>Fortress — homelab AI stack</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,19 +26,19 @@
 <main>
 
 <section class="hero wrap">
-  <p class="eyebrow">Public-safe snapshot &middot; no host details, paths, or live credentials</p>
+  <p class="eyebrow">Architecture overview &middot; self-hosted AI &amp; automation</p>
   <div class="hero-grid">
     <div>
       <h1>The<br>Fortress</h1>
       <p class="lead">A <strong>self-hosted</strong> AI and automation stack on a single machine: <strong>one GPU, one shared brain, 40+ specialist agents</strong>, plus health checks and a maintenance agent that only proposes changes — you approve them.</p>
       <p class="chips"><span>Linux workstation</span><span>Consumer GPU (~16 GB)</span><span>Docker</span><span>Private network access</span></p>
     </div>
-    <div class="term" role="img" aria-label="Illustrative heal summary (not live output)">
-      <div class="term-bar"><b></b><b></b><b></b><span>fortress heal --check (illustrative)</span></div>
+    <div class="term" role="img" aria-label="Example health check summary">
+      <div class="term-bar"><b></b><b></b><b></b><span>fortress heal --check (example)</span></div>
       <pre><span class="ok">OK  </span> brain / queue / gateway
 <span class="ok">OK  </span> agent platform checks
 <span class="ok">OK  </span> duty + sandbox audit
-<span class="dim">(exact counts omitted on public copy)</span></pre>
+<span class="dim">All major subsystems responding</span></pre>
     </div>
   </div>
 
@@ -74,11 +74,11 @@
           <p><b>Alternate runtime</b><br>Optional second engine for smaller or cold-stored models.</p>
         </div>
         <div class="card">
-          <h4>What this page omits</h4>
+          <h4>Operational discipline</h4>
           <ul class="proof">
-            <li>No hostnames, IPs, or port numbers.</li>
-            <li>No paths under <code>/home</code>, <code>/opt</code>, or cloud account hints.</li>
-            <li>No “current incident” or backup internals.</li>
+            <li>Exposure is minimized: internal endpoints and credentials stay off the public web.</li>
+            <li>Infrastructure layout and backups follow a reviewed runbook — not advertised here.</li>
+            <li>Health and incident detail live in the ops channel, not in marketing copy.</li>
           </ul>
         </div>
       </aside>
@@ -89,7 +89,7 @@
 <section id="model" class="wrap sect">
   <p class="eyebrow">02 &mdash; The local model</p>
   <h2>Big MoE, long context, bounded VRAM.</h2>
-  <p class="sub">Weights are quantized; KV cache is compressed; experts can be staged so the active path fits consumer hardware. Exact flags and utilization are intentionally not published here.</p>
+  <p class="sub">Weights are quantized; KV cache is compressed; experts can be staged so the active path fits consumer hardware. Tuning stays environment-specific so the focus here stays on architecture.</p>
   <div class="grid4">
     <div class="card"><code class="acc">Quantized</code><h3>Weights</h3><p>4-bit–class GGUF-style serving; only a small expert subset active per token.</p></div>
     <div class="card"><code class="acc">MoE</code><h3>Experts</h3><p>Router + experts; offload strategy keeps GPU headroom for context and bursts.</p></div>
@@ -109,7 +109,7 @@
       <article class="card agent"><div class="ah"><h3>Dexter</h3><span>finance</span></div><p>Deep finance research loop; separate from platform ops.</p><p class="ref"><b>Refuses</b> Trading instructions.</p></article>
       <article class="card agent"><div class="ah"><h3>Finance Agent</h3><span>finance</span></div><p>Watchlist, snapshots, and gateway-facing tools — typed surface only.</p><p class="ref"><b>Refuses</b> Raw shell.</p></article>
       <article class="card agent"><div class="ah"><h3>flowsmith</h3><span>automation</span></div><p>Builds and versions automation flows; activation is deliberate.</p><p class="ref"><b>Refuses</b> Unsafe execution primitives.</p></article>
-      <article class="card agent"><div class="ah"><h3>ODA</h3><span>design</span></div><p>Design artifacts and static previews on the private network.</p><p class="ref"><b>Refuses</b> Server administration.</p></article>
+      <article class="card agent"><div class="ah"><h3>ODA</h3><span>design</span></div><p>Design artifacts and static previews served inside the lab.</p><p class="ref"><b>Refuses</b> Server administration.</p></article>
       <article class="card agent"><div class="ah"><h3>Virtual Self</h3><span>personal</span></div><p>Memory and recall over a structured store — bounded scope.</p><p class="ref"><b>Refuses</b> General internet research.</p></article>
     </div>
     <div class="card also">
@@ -167,19 +167,19 @@
     <li class="on"><b>Object storage</b><i>typical</i><span>S3-compatible vault for inbound sync</span></li>
     <li class="on"><b>Personal products</b><i>varies</i><span>Feed backend, memory service, newsletters, games — custom code</span></li>
   </ul>
-  <p class="muted small">No per-container names or versions on this page — those help attackers fingerprint CVEs.</p>
+  <p class="muted small">Stack versions rotate with upgrades; this page stays about roles and patterns, not a CVE shopping list.</p>
 </section>
 
 <section id="products" class="band">
   <div class="wrap">
     <p class="eyebrow">07 &mdash; Built on top</p>
     <h2>Original applications, not only charts.</h2>
-    <p class="sub">Several repos are product-sized: feed ranking with transparent scoring, a positive-news pipeline, gamified productivity (web + mobile), finance tooling with a thin client contract, and a 100k+ LOC investigative-agent codebase. Test counts are omitted here.</p>
+    <p class="sub">Several repos are product-sized: feed ranking with transparent scoring, a positive-news pipeline, gamified productivity (web + mobile), finance tooling with a thin client contract, and a 100k+ LOC investigative-agent codebase.</p>
     <div class="notes">
       <div class="card"><h3>Feed</h3><p>Miniflux-style API for a third-party reader; trust and diversity baked into ranking.</p></div>
       <div class="card"><h3>News edition</h3><p>Hope-scored newsletter with human approval before send.</p></div>
       <div class="card"><h3>Life planner</h3><p>Backend + web + Android; “quest” metaphor instead of guilt dashboards.</p></div>
-      <div class="card"><h3>Finance surface</h3><p>Gateway-disciplined chat and automation control from a phone app (design doc only on this site).</p></div>
+      <div class="card"><h3>Finance surface</h3><p>Gateway-disciplined chat and automation control from a phone app — contract-first, same patterns as the rest of the stack.</p></div>
     </div>
   </div>
 </section>
@@ -188,15 +188,15 @@
   <div class="wrap">
     <p class="eyebrow">Security posture (high level)</p>
     <h2 class="h-sm">Defense in depth — without a punch list for attackers.</h2>
-    <p class="sub">Private connectivity, authenticated APIs, least-privilege agents, encrypted off-site backup, and separation between “ops proposals” and “ops execution.” Details of firewall rules, backup backends, and token storage stay in private docs.</p>
+    <p class="sub">Private connectivity, authenticated APIs, least-privilege agents, encrypted off-site backup, and separation between “ops proposals” and “ops execution.” Policy and implementation specifics are handled in ops docs, not splashed on a landing page.</p>
   </div>
 </section>
 
 </main>
 
 <footer class="wrap foot">
-  <span>FORTRESS &middot; public-safe portfolio snapshot</span>
-  <span>For the full technical snapshot with evidence tags, use the private markdown — not this page.</span>
+  <span>FORTRESS &middot; homelab AI &amp; automation</span>
+  <span>Questions welcome — reach out via the portfolio contact link.</span>
 </footer>
 
 </body>
