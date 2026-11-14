@@ -1,0 +1,1 @@
+import{a as e,r as t,t as n}from"./substack-feed.QuxuojmI.js";async function r(){let r=document.getElementById(`substack-grid`);if(!r)return;let i=(r.dataset.slugs??``).split(`,`).filter(Boolean),a=await n();a.length&&(!i.length||e(i,a))&&(t(r,a),r.dataset.slugs=a.map(e=>e.slug).join(`,`),r.dataset.liveSync=new Date().toISOString())}r();
