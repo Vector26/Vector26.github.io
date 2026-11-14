@@ -71,6 +71,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" || echo "Pages build request failed; the push should still trigger a build."
 
+      - name: Save synced Substack posts to source
+        working-directory: src
+        run: |
+          git add src/data/substack.json src/content/blog public/substack/posts.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync Substack posts"
+          git push origin HEAD:source
+
       - name: Save synced Pinterest pins to source
         working-directory: src
         run: |

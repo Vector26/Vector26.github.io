@@ -25,7 +25,9 @@ git push origin HEAD:source
 
 ## Substack sync
 
-`npm run build` runs `scripts/sync-substack.mjs` first. It pulls the RSS feed, cleans each post's HTML into `src/data/substack.json`, and refreshes `src/content/blog/`. If the feed is unreachable, the build continues with the last synced posts.
+`npm run build` runs `scripts/sync-substack.mjs` first. It pulls the RSS feed, cleans each post's HTML into `src/data/substack.json`, writes a lite `public/substack/posts.json` for same-origin fallback, and refreshes `src/content/blog/`. If the feed is unreachable, the build continues with the last synced posts.
+
+In the browser, `/substack/` and missing essay URLs load the latest posts live from Substack (via the public RSS bridge) on every visit—no manual redeploy needed for new essays to appear in the list. Essays without a pre-built page are rendered on `404` from the live feed.
 
 ## Pinterest sync
 

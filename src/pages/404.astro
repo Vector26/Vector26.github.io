@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getProfile } from '../lib/site';
+
+const profile = await getProfile();
+---
+<BaseLayout title="Not found" current="none">
+  <article class="wrap essay" id="substack-live-essay" hidden data-substack={profile.links.substack}>
+    <a class="essay__back mono" href="/substack">← All essays</a>
+    <header class="essay__head">
+      <p class="eyebrow mono">prometheus</p>
+      <h1 class="essay__title"></h1>
+      <p class="essay__dek" hidden></p>
+    </header>
+    <div class="essay__body"></div>
+    <footer class="essay__foot">
+      <p class="faint">Loaded live from Substack.</p>
+      <div class="essay__actions">
+        <a class="btn btn--primary" data-substack-post href={profile.links.substack} target="_blank" rel="noopener">Comment on Substack ↗</a>
+        <a class="btn" data-substack-subscribe href={`${profile.links.substack}subscribe`} target="_blank" rel="noopener">Subscribe ↗</a>
+      </div>
+    </footer>
+  </article>
+
+  <div class="wrap" id="generic-404" style="padding: 4rem 0; max-width: 42ch">
+    <p class="eyebrow mono">404</p>
+    <h1 class="section-title">Page not found.</h1>
+    <p class="section-lead">
+      <a href="/">Home</a> · <a href="/substack">Essays</a>
+    </p>
+  </div>
+
+  <script src="../scripts/substack-missing.ts"></script>
+</BaseLayout>

@@ -17,7 +17,11 @@ const posts = getSubstackPosts();
       Attention, craft, and living deliberately. Read them here, or subscribe on
       <a href={profile.links.substack} target="_blank" rel="noopener">Substack</a> to get new ones by email.
     </p>
-    <div class="substack__grid">
+    <div
+      class="substack__grid"
+      id="substack-grid"
+      data-slugs={posts.map((p) => p.slug).join(',')}
+    >
       {posts.map((p) => (
         <a class="substack__card" href={`/substack/${p.slug}`}>
           {p.cover && (
@@ -37,4 +41,5 @@ const posts = getSubstackPosts();
       <a class="btn btn--primary" href={`${profile.links.substack}subscribe`} target="_blank" rel="noopener">Subscribe on Substack ↗</a>
     </p>
   </div>
+  <script src="../../scripts/substack-sync.ts"></script>
 </BaseLayout>

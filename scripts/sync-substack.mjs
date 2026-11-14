@@ -12,6 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 const feedUrl = 'https://vector2604.substack.com/feed';
 const outJson = path.join(root, 'src/data/substack.json');
+const publicPosts = path.join(root, 'public/substack/posts.json');
 const blogDir = path.join(root, 'src/content/blog');
 
 function slugFromLink(link) {
@@ -142,6 +143,22 @@ async function main() {
   const payload = { syncedAt: new Date().toISOString(), feed: feedUrl, posts };
   await fs.mkdir(path.dirname(outJson), { recursive: true });
   await fs.writeFile(outJson, JSON.stringify(payload, null, 2) + '\n');
+  const lite = {
+    syncedAt: payload.syncedAt,
+    feed: payload.feed,
+    posts: payload.posts.map(({ title, description, url, pubDate, slug, cover, readingMinutes }) => ({
+      title,
+      description,
+      url,
+      pubDate,
+      slug,
+      cover,
+      readingMinutes,
+      html: '',
+    })),
+  };
+  await fs.mkdir(path.dirname(publicPosts), { recursive: true });
+  await fs.writeFile(publicPosts, JSON.stringify(lite, null, 2) + '\n');
   await fs.mkdir(blogDir, { recursive: true });
   for (const post of payload.posts) {
     const file = path.join(blogDir, `${post.slug}.md`);
